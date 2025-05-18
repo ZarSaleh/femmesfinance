@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Femme & Finance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <script>
+        window.addEventListener('mouseover', initLandbot, { once: true });
+        window.addEventListener('touchstart', initLandbot, { once: true });
+        var myLandbot;
+        function initLandbot() {
+          if (!myLandbot) {
+            var s = document.createElement('script');
+            s.type = "module"
+            s.async = true;
+            s.addEventListener('load', function() {
+              myLandbot = new Landbot.Popup({
+                configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2926170-9713VTGIULNKP5K7/index.json',
+              });
+            });
+            s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+          }
+        }
+        </script>
+            
+    <!-- Section 1 : Header -->
+    <style>
+        .italic {
+            font-family: "Italiana", serif;
+        }
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    padding: 10px;
+    text-decoration: none;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav a {
+        width: 100%;
+        gap: 10px;  
+    }
+
+}
+    </style>
+    <header class="border-b bg-white">
+        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="Logo 10.svg" alt="ff logo" width="30px" height="20px">
+                <p class="italic pl-4 font-bold text-emerald-800 text-lg">Femme & Finance</p>
+            </div>
+            <nav class="navbar" class="hidden md:flex space-x-6">
+                <a href="#apropos" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">À propos</a>
+                <a href="#guide" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Guides</a>
+                <a href="#contact" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Contact</a>
+                <a href="#reseaux" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Nous suivre</a>
+            </nav>
+        
+        </div>
+    </header>
+    <style>
+        :root {
+            --emerald-50: rgba(239, 244, 241, 1);
+            --emerald-100: rgba(223, 233, 228, 1);
+            --emerald-600: rgba(53, 70, 59, 1);
+            --emerald-700: rgba(48, 63, 53, 1);
+            --emerald-800: rgba(43, 56, 47, 1);
+            --emerald-900: rgba(38, 49, 41, 1);
+        }
+
+        .bg-emerald-50 {
+            background-color: var(--emerald-50);
+        }
+
+        .bg-emerald-100 {
+            background-color: var(--emerald-100);
+        }
+
+        .bg-emerald-600 {
+            background-color: var(--emerald-600);
+        }
+
+        .bg-emerald-700 {
+            background-color: var(--emerald-700);
+        }
+
+        .bg-emerald-800 {
+            background-color: var(--emerald-800);
+        }
+
+        .bg-emerald-900 {
+            background-color: var(--emerald-900);
+        }
+
+        .text-emerald-700 {
+            color: var(--emerald-700);
+        }
+
+        .text-emerald-800 {
+            color: var(--emerald-800);
+        }
+
+        .text-emerald-900 {
+            color: var(--emerald-900);
+        }
+
+        .hover\:bg-emerald-700:hover {
+            background-color: var(--emerald-700);
+        }
+
+        .hover\:bg-emerald-50:hover {
+            background-color: var(--emerald-50);
+        }
+
+        .hover\:text-emerald-600:hover {
+            color: var(--emerald-600);
+        }
+
+        .border-emerald-900 {
+            border-color: var(--emerald-900);
+        }
+
+        .focus\:ring-emerald-600:focus {
+            box-shadow: 0 0 0 2px var(--emerald-600);
+        }
+    </style>
+    <!-- Section 2 : Hero-->
+    <section class="py-16 md-py-24 bg-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h1 class="text-3x1 md:text-4x1 lg:text-5xl font-bold text-emerald-800 leading-tight mb-6">Construit ton plan financier étape par étape en toute sérénité.</h1>
+                <h2 class="text-lg md:text-xl text-neutral-700 mb-8">Guides gratuits, outils concrets et pratiques,<br>
+                    conseils et une communauté bienveillante</h2>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#guide" class="cta-button">
+                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-6 h-auto text-base rounded-full">
+                            Recevoir mon guide gratuit
+                        </button>
+                    </a>
+                    <a href="#more">
+                        <button 
+                            class="border border-emerald-900 text-emerald-700 hover:bg-emerlad-50 px-6 py-6 h-auto text-base rounded-full">
+                            En savoir plus
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="Pinance.png" alt="femme de confiance" width="400" height="200"
+                    class="rounded-lg shadow-lg">
+            </div>
+        </div>
+    </section>
+    <!--Section à propos-->
+    <!-- Section Animated Text -->
+    <style>
+        #animated-text {
+            display: inline-block;
+            position: relative;
+            animation: slide 2s infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            25% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            75% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+    <section class="py-4 bg-emerald-600">
+        <div class="container mx-auto px-4 text-center">
+            <p id="animated-text" class="text-lg font-bold italic text-white"></p>
+        </div>
+        <script>
+            const phrases = [
+                "Prenez le contrôle de vos finances.",
+                "Construisez un avenir serein.",
+                "Rejoignez une communauté bienveillante.",
+                "Apprenez à investir en toute confiance."
+            ];
+            phrases.push("Construis ton avenir financier dés maintenant");
+            let index = 0;
+            const animatedTextElement = document.getElementById("animated-text");
+
+            function updateText() {
+                animatedTextElement.textContent = phrases[index];
+                index = (index + 1) % phrases.length;
+            }
+
+            setInterval(updateText, 2000);
+            updateText(); // Initialize with the first phrase
+        </script>
+    </section>
+    
+    <section id="apropos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold italic text-emerald-800 mb-6">
+                    Pourquoi Femme & Finance ?
+                </h2>
+                <div class="flex justify-center mb-8">
+                    <img src="Finance.png" alt="photo de profil" width="120" height="120">
+                </div>
+                <p class="text-lg text-natural-700"> 
+                    Femme & Finance est une initiative dédiée à aider les femmes à prendre le contrôle de leurs finances personnelles. 
+                    Nous croyons en l'importance de l'éducation financière pour bâtir un avenir serein et prospère. Notre mission est de fournir des ressources accessibles 
+                    et adaptées à toutes les femmes, quel que soit leur niveau de connaissance en finances personnelles.
+                </p>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center bg-yellow-600 rounded-lg py-4 px-4 ">
+                <div class="flex justify-center mb-4">
+                    <img src="clear.png" alt="Clarté" width="50" height="50">
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Clarté</h3>
+                <p class="text-neutral-200">Des explications simples et accessibles pour comprendre vos finances.</p>
+            </div>
+            <div class="text-center bg-yellow-600 rounded-lg py-4 px-4">
+                <div class="flex justify-center mb-4">
+                    <img src="directions.png" alt="Outils" width="50" height="50">
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Outils</h3>
+                <p class="text-neutral-200">Des outils pratiques pour vous aider à gérer et planifier vos finances.</p>
+            </div>
+            <div class="text-center bg-yellow-600 rounded-lg py-4 px-4">
+                <div class="flex justify-center mb-4">
+                    <img src="community.png" alt="Communauté" width="50" height="50">
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Communauté</h3>
+                <p class="text-neutral-200">Une communauté bienveillante pour échanger et progresser ensemble.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Section Quote -->
+    <section class="py-16 bg-yellow-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center">
+                <blockquote class="text-2xl md:text-3xl italic font-semibold text-emerald-800">
+                    “Le plus grand risque, c’est de ne pas en prendre”
+                </blockquote>
+                <p class="mt-4 text-lg text-neutral-700">Christine LAGARDE, présidente de la Banque centrale européenne</p>
+            </div>
+        </div>
+    </section>
+    <!-- Section Resources -->
+    <section id="more" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
+                    Les ressources pour vous accompagner
+                </h2>
+                <p class="text-lg text-neutral-700">
+                    Découvrez nos ressources variées pour vous aider à atteindre vos objectifs financiers.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                    <div class="flex justify-center mb-4">
+                        <img src="book.png" alt="Guides et e-book" width="60" height="60">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Guides et e-book</h3>
+                    <p class="text-neutral-700">Des guides pratiques et e-books pour approfondir vos connaissances.</p>
+                </div>
+                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                    <div class="flex justify-center mb-4">
+                        <img src="podcast.png" alt="Podcast & Webinaire" width="60" height="60">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Podcast & Webinaire</h3>
+                    <p class="text-neutral-700">Des discussions inspirantes et des webinaires interactifs.</p>
+                </div>
+                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                    <div class="flex justify-center mb-4">
+                        <img src="Outil.png" alt="Outils numériques" width="60" height="60">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Outils numériques</h3>
+                    <p class="text-neutral-700">Des outils en ligne pour simplifier la gestion de vos finances.</p>
+                </div>
+                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                    <div class="flex justify-center mb-4">
+                        <img src="exchange.png" alt="Communauté" width="60" height="60">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Communauté</h3>
+                    <p class="text-neutral-700">Rejoignez une communauté bienveillante pour échanger et progresser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section Guide Preview -->
+    <section id="#" class="py-16 bg-emerald-50">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
+                    L'essentiel de la gestion de finance
+                </h2>
+                <ul class="list-disc pl-5 text-lg text-neutral-700 space-y-4">
+                    <li><strong>L'éducation financière au féminin</strong></li>
+                    <li><strong>Pourquoi investir ?</strong></li>
+                    <li><strong>Comment définir ses objectifs financiers</strong></li>
+                    <li><strong>Les fondamentaux de l'investissement</strong></li>
+                    <li><strong>Stratégies et bonnes pratiques</strong></li>
+                    <li><strong>Ressources et outils</strong></li>
+                </ul>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="pciture.png" alt="Aperçu du guide" 
+                    class="rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out w-3/4">
+            </div>
+        </div>
+    </section>
+    <!-- Section Call to Action -->
+    <section id="guide" class="py-16 bg-emerald-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto text-center bg-white rounded-lg shadow-lg p-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-4">Recevez votre guide gratuit</h1>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Inscrivez-vous pour recevoir votre guide gratuit et rejoindre notre newsletter.
+                </p>
+                <form action="#" method="POST" class="space-y-4">
+                    <div>
+                        <input type="text" name="name" placeholder="Votre nom" 
+                            class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600">
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Votre email" 
+                            class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600">
+                    </div>
+                    <button type="submit" 
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg">
+                        Recevoir mon guide financier gratuit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Footer -->
+    <footer class="bg-[rgba(53,70,59,1)] text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left Section -->
+            <div>
+                <h3 class="text-lg font-bold mb-4">Liens utiles</h3>
+                <ul class="space-y-2">
+                    <li><a href="#propos" class="hover:underline">À propos</a></li>
+                    <li><a href="#resources" class="hover:underline">Blog/Ressources</a></li>
+                    <li><a href="#mentions" class="hover:underline">Mentions légales</a></li>
+                    <li><a href="#conformity" class="hover:underline">Conformités</a></li>
+                </ul>
+            </div>
+            <!-- Middle Section -->
+            <div id="reseaux" class="text-center">
+                <a   class="text-lg font-bold mb-4">Suivez-nous</a>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" aria-label="Facebook" class="hover:opacity-75">
+                        <img src="facebook.png" alt="Facebook" width="30" height="30">
+                    </a>
+                    <a href="#" aria-label="Twitter" class="hover:opacity-75">
+                        <img src="twitter.png" alt="Twitter" width="30" height="30">
+                    </a>
+                    <a href="https://www.instagram.com/femmes.finance?igsh=MzNjMjk4eGgzaXl5&utm_source=qr" target="_blank" aria-label="Instagram" class="hover:opacity-75">
+                        <img src="instagram.png" alt="Instagram" width="30" height="30">
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="hover:opacity-75">
+                        <img src="linkedin (1).png" alt="LinkedIn" width="30" height="30">
+                    </a>
+                    <a href="https://www.tiktok.com/@femmes.finance?_t=ZN-8wSoume77Zu&_r=1" target="_blank" aria-label="TikTok" class="hover: opacity-75">
+                        <img src="tik-tok.png" alt="TikTok" width="30" height="30">
+                    </a>
+                </div>
+            </div>
+            <!-- Right Section -->
+            <div>
+                <h3 id="contact" class="text-lg font-bold mb-4">Contactez-nous</h3>
+                <p id="contact" class="mb-4">Email : <a href="mailto:contact@femmefinance.com" class="underline">contact@femmesfinance.fr</a></p>
+                <h3 class="text-lg font-bold mb-4">Abonnez-vous</h3>
+                <form action="#" method="POST" class="space-y-4">
+                    <input type="email" name="newsletter-email" placeholder="Votre email" 
+                        class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 text-black">
+                    <button type="submit" 
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg">
+                        S'abonner
+                    </button>
+                    <p class="text-center text-sm text-neutral-400 mt-4">
+                        &copy; 2025 Femme & Finance. Tous droits réservés.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </footer>
+           
+    <script>
+
+    </script>
+</body>
+
+</html>
