@@ -30,36 +30,73 @@
         }
         </script>
             
-    <!-- Section 1 : Header -->
-    <style>
-        .italic {
-            font-family: "Italiana", serif;
-        }
-nav {
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+    .italic {
+        font-family:Georgia, 'Times New Roman', Times, serif
+    }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 10px 20px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Responsive : version mobile */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .nav-links.show {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-wrap: wrap;
+  }
 }
 
-nav a {
-    padding: 10px;
-    text-decoration: none;
-}
-/* Responsive */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    nav a {
-        width: 100%;
-        gap: 10px;  
-    }
 
-}
-    </style>
-    <header class="border-b bg-white">
+</style>
+<header>
+    <nav class="navbar">
+        <div class="logo container mx-auto py-4 px-4 flex justify-between items-center">
+            <div class="flex items-center">
+            <img src="Logo 10.svg" alt="ff logo" width="30px" height="20px">
+            <p class="font-style-italic pl-4 font-bold text-emerald-800 text-lg">FemmesFinance</p>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#appros" class="text-sm font-medium text-emerald-700 hover:text-emerald-600" >À propos</a></li>
+                <li><a href="#guide" class="text-sm font-medium text-emerald-700 hover:text-emerald-600" >Guide</a></li>
+                <li><a href="#contact" class="text-sm font-medium text-emerald-700 hover:text-emerald-600" >Contact</a></li>
+                <li><a href="#reseaux" class="text-sm font-medium text-emerald-700 hover:text-emerald-600" >Nous suivre</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+   <!-- <header class="border-b bg-white">
         <div class="container mx-auto py-4 px-4 flex justify-between items-center">
             <div class="flex items-center">
                 <img src="Logo 10.svg" alt="ff logo" width="30px" height="20px">
@@ -73,7 +110,7 @@ nav a {
             </nav>
         
         </div>
-    </header>
+    </header> -->
     <style>
         :root {
             --emerald-50: rgba(239, 244, 241, 1);
@@ -161,9 +198,14 @@ nav a {
                     </a>
                 </div>
             </div>
-            <div class="md:w-1/2">
-                <img src="Pinance.png" alt="femme de confiance" width="400" height="200"
-                    class="rounded-lg shadow-lg">
+            <div class="hero-animation">
+                <dotlottie-player
+  src="https://lottie.host/8b61335a-7b5e-4285-bf9c-fdc9dcfb2450/7dzZgE2Gd9.lottie"
+  background="transparent"
+  speed="1"
+  style="width: 800px; height: 500px"
+  loop
+  autoplay></dotlottie-player>
             </div>
         </div>
     </section>
@@ -224,13 +266,13 @@ nav a {
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center mb-12">
                 <h2 class="text-2xl md:text-3xl font-bold italic text-emerald-800 mb-6">
-                    Pourquoi Femme & Finance ?
+                    Pourquoi Femmes & Finance ?
                 </h2>
                 <div class="flex justify-center mb-8">
                     <img src="Finance.png" alt="photo de profil" width="120" height="120">
                 </div>
                 <p class="text-lg text-natural-700"> 
-                    Femme & Finance est une initiative dédiée à aider les femmes à prendre le contrôle de leurs finances personnelles. 
+                    Femmes & Finance est une initiative dédiée à aider les femmes à prendre le contrôle de leurs finances personnelles. 
                     Nous croyons en l'importance de l'éducation financière pour bâtir un avenir serein et prospère. Notre mission est de fournir des ressources accessibles 
                     et adaptées à toutes les femmes, quel que soit leur niveau de connaissance en finances personnelles.
                 </p>
@@ -404,8 +446,15 @@ nav a {
     </footer>
            
     <script>
-
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('show');
+}
     </script>
+<script
+src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+type="module"></script>
+
 </body>
 
 </html>
