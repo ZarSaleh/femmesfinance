@@ -37,7 +37,23 @@
             padding: 20px;
             box-sizing: border-box;
         }
-    </style>
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .image-container {
+                flex-direction: row;
+            }
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        </style>
+        </head>
 <body>
     <div class="container">
     <header>
