@@ -107,10 +107,26 @@
             </div>
             <button class="menu-toggle" onclick="toggleMenu(); this.style.display = 'none';">☰</button>
             <ul class="nav-links" id="navLinks">
+                <li class="relative"></li>
+                    <button onclick="toggleDropdown()" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 focus:outline-none">
+                        Fonctionnalités
+                    </button>
+                    <ul id="dropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2">
+                        <li><a href="#budget" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-50">Calcul des dépenses</a></li>
+                        <li><a href="#epargne" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-50">Simulateur d'épargne</a></li>
+                        <li><a href="#investissement" class="block px-4 py-2 text-sm text-emerald-700 hover:bg-emerald-50">Tableau d'investissement</a></li>
+                    </ul>
+                </li>
+                <script>
+                    function toggleDropdown() {
+                        const dropdownMenu = document.getElementById('dropdownMenu');
+                        dropdownMenu.classList.toggle('hidden');
+                    }
+                </script>
                 <li><a href="#appros" class="text-sm font-medium text-emerald-700 hover:text-emerald-300">À propos</a></li>
+                <li><a href="blog.html" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
                 <li><a href="#guide" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline">Guide</a></li>
                 <li><a href="#contact" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline">Contact</a></li>
-                <li><a href="blog.html" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -252,10 +268,10 @@
         </div>
         <script>
             const phrases = [
-                "Gére, épargne, investis avec stratégie.",
-                "Construisez un avenir serein.",
-                "Apprendre à gérer son argent, c'est s'offrir des choix.",
-                "Épargne aujourd'hui, investis demain.",
+                "Gére, épargne, investis avec stratégie",
+                "Construisez un avenir serein",
+                "Apprendre à gérer son argent, c'est s'offrir des choix",
+                "Épargne aujourd'hui, investis demain",
                 "Ton argent mérite de grandir"
             ];
             phrases.push("Construis ton avenir financier dés maintenant");
