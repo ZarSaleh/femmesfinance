@@ -114,22 +114,6 @@
         </div>
     </nav>
 </header>
-
-   <!-- <header class="border-b bg-white">
-        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="Logo 10.svg" alt="ff logo" width="30px" height="20px">
-                <p class="italic pl-4 font-bold text-emerald-800 text-lg">Femme & Finance</p>
-            </div>
-            <nav class="navbar" class="hidden md:flex space-x-6">
-                <a href="#apropos" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">À propos</a>
-                <a href="#guide" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Guides</a>
-                <a href="#contact" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Contact</a>
-                <a href="#reseaux" class="text-sm font-medium text-emerald-700 hover:text-emerald-600">Nous suivre</a>
-            </nav>
-        
-        </div>
-    </header> -->
     <style>
         :root {
             --emerald-50: rgba(239, 244, 241, 1);
@@ -197,12 +181,16 @@
         }
     </style>
     <!-- Section 2 : Hero-->
-    <section class="py-16 md-py-24 bg-white">
+    <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                <h1 class="text-3x1 md:text-4x1 lg:text-5xl font-bold text-emerald-800 leading-tight mb-6">Construit ton plan financier étape par étape en toute sérénité.</h1>
-                <h2 class="text-lg md:text-xl text-neutral-700 mb-8">Guides gratuits, outils concrets et pratiques,<br>
-                    conseils et une communauté bienveillante</h2>
+            <div class="md:w-2/3 mb-10 md:mb-0 md:pr-10">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-800 leading-relaxed mb-6">
+                    Pilote ton budget<br> Booste ton épargne<br> Ose l'investissement
+                </h1>
+                <h3 class="text-lg md:text-xl text-neutral-700 mb-8">
+                    Chez Femme.Finance, on t'aide à gérer budget,<br>
+                     épargner efficacement et investir intelligemment.
+                </h3>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="#guide" class="cta-button">
                         <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-6 h-auto text-base rounded-full">
@@ -211,20 +199,21 @@
                     </a>
                     <a href="#more">
                         <button 
-                            class="border border-emerald-900 text-emerald-700 hover:bg-emerlad-50 px-6 py-6 h-auto text-base rounded-full">
+                            class="border border-emerald-900 text-emerald-700 hover:bg-emerald-50 px-6 py-6 h-auto text-base rounded-full">
                             En savoir plus
                         </button>
                     </a>
                 </div>
             </div>
-            <div class="hero-animation">
+            <div class="md:w-1/3 flex justify-end">
                 <dotlottie-player
-  src="https://lottie.host/8b61335a-7b5e-4285-bf9c-fdc9dcfb2450/7dzZgE2Gd9.lottie"
-  background="transparent"
-  speed="1"
-  style="width: 800px; height: 500px"
-  loop
-  autoplay></dotlottie-player>
+                    src="https://lottie.host/8b61335a-7b5e-4285-bf9c-fdc9dcfb2450/7dzZgE2Gd9.lottie"
+                    background="transparent"
+                    speed="1"
+                    style="width: 100%; max-width: 700px; height: auto"
+                    loop
+                    autoplay>
+                </dotlottie-player>
             </div>
         </div>
     </section>
@@ -262,10 +251,11 @@
         </div>
         <script>
             const phrases = [
-                "Prenez le contrôle de vos finances.",
+                "Gére, épargne, investis avec stratégie.",
                 "Construisez un avenir serein.",
-                "Rejoignez une communauté bienveillante.",
-                "Apprenez à investir en toute confiance."
+                "Apprendre à gérer son argent, c'est s'offrir des choix.",
+                "Épargne aujourd'hui, investis demain.",
+                "Ton argent mérite de grandir"
             ];
             phrases.push("Construis ton avenir financier dés maintenant");
             let index = 0;
@@ -293,42 +283,67 @@
                 <p class="text-lg text-natural-700"> 
                     Femmes & Finance est une initiative dédiée à aider les femmes à prendre le contrôle de leurs finances personnelles. 
                     Nous croyons en l'importance de l'éducation financière pour bâtir un avenir serein et prospère. Notre mission est de fournir des ressources accessibles 
-                    et adaptées à toutes les femmes, quel que soit leur niveau de connaissance en finances personnelles.
+                    et adaptées à toutes les femmes, quel que soit leur niveau de connaissance en finance.
                 </p>
             </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="text-center bg-emerald-600 rounded-lg py-4 px-4 ">
-                <div class="flex justify-center mb-4">
-                    <img src="clear.png" alt="Clarté" width="50" height="50">
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Clarté</h3>
-                <p class="text-neutral-200">Des explications simples et accessibles pour comprendre vos finances.</p>
-            </div>
-            <div class="text-center bg-emerald-600 rounded-lg py-4 px-4">
-                <div class="flex justify-center mb-4">
-                    <img src="directions.png" alt="Outils" width="50" height="50">
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Outils</h3>
-                <p class="text-neutral-200">Des outils pratiques pour vous aider à gérer et planifier vos finances.</p>
-            </div>
-            <div class="text-center bg-emerald-600  rounded-lg py-4 px-4">
-                <div class="flex justify-center mb-4">
-                    <img src="community.png" alt="Communauté" width="50" height="50">
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">Communauté</h3>
-                <p class="text-neutral-200">Une communauté bienveillante pour échanger et progresser ensemble.</p>
-            </div>
-        </div>
         </div>
     </section>
-    <!-- Section Quote -->
-    <section class="py-16 bg-gray-100">
+
+    <!-- Section feature -->
+
+    <section class="py-16 bg-emerald-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                    Nos Services
+                </h2>
+                <p class="text-lg text-gray-500">
+                    Découvrez comment nous pouvons vous accompagner dans la gestion de vos finances.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="text-center bg-white rounded-2xl shadow-md py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="gere-budget-icon.svg" alt="Gérer son budget" width="200" height="200">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Gérer son budget</h3>
+                    <p class="text-neutral-700">
+                        Apprenez à organiser vos finances et à établir un budget efficace pour atteindre vos objectifs.
+                    </p>
+                </div>
+                <!-- Service 2 -->
+                <div class="text-center bg-white rounded-2xl shadow-md py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="epargner-epargne-icon.svg" alt="Épargner son argent" width="200" height="200">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Épargner son argent</h3>
+                    <p class="text-neutral-700">
+                        Découvrez des stratégies pour épargner efficacement et bâtir une sécurité financière.
+                    </p>
+                </div>
+                <!-- Service 3 -->
+                <div class="text-center bg-white rounded-2xl shadow-md py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                    <div class="flex justify-center mb-4">
+                        <img src="investir-argent-icon.svg" alt="Investir son argent" width="200" height="200">
+                    </div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Investir son argent</h3>
+                    <p class="text-neutral-700">
+                        Apprenez les bases de l'investissement pour faire fructifier votre argent en toute confiance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+           
+
+  <!-- Section quote -->
+    <section class="py-14 "></section>
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto text-center">
-                <blockquote class="text-2xl md:text-3xl italic font-semibold text-emerald-800">
-                    “Le plus grand risque, c’est de ne pas en prendre”
+                <blockquote class="text-2xl md:text-3xl italic text-emerald-800">
+                    “Investir en soi est le meilleur investissement que l'on puisse faire.”
                 </blockquote>
-                <p class="mt-4 text-lg text-neutral-700">Christine LAGARDE, présidente de la Banque centrale européenne</p>
             </div>
         </div>
     </section>
@@ -336,47 +351,47 @@
     <section id="more" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
-                    Les ressources pour vous accompagner
+                <h2 class="text-2xl md:text-2xl font-bold text-emerald-800 mb-6">
+                    Nos ressources 
                 </h2>
                 <p class="text-lg text-neutral-700">
                     Découvrez nos ressources variées pour vous aider à atteindre vos objectifs financiers.
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                <div class="text-center bg-emerald-600 rounded-l-full py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
                     <div class="flex justify-center mb-4">
                         <img src="book.png" alt="Guides et e-book" width="60" height="60">
                     </div>
-                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Guides et e-book</h3>
-                    <p class="text-neutral-700">Des guides pratiques et e-books pour approfondir vos connaissances.</p>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Guides et e-book</h3>
+                    <p class="text-neutral-100">Des guides pratiques et artciles pour approfondir vos connaissances.</p>
                 </div>
-                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                <div class="text-center bg-emerald-600 rounded-lg py-6 px-4 shadow-md">
                     <div class="flex justify-center mb-4">
                         <img src="podcast.png" alt="Podcast & Webinaire" width="60" height="60">
                     </div>
-                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Podcast & Webinaire</h3>
-                    <p class="text-neutral-700">Des discussions inspirantes et des webinaires interactifs.</p>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Podcast & Webinaire</h3>
+                    <p class="text-neutral-100">Des discussions inspirantes et des webinaires interactifs.</p>
                 </div>
-                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                <div class="text-center bg-emerald-600 rounded-lg py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
                     <div class="flex justify-center mb-4">
                         <img src="Outil.png" alt="Outils numériques" width="60" height="60">
                     </div>
-                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Outils numériques</h3>
-                    <p class="text-neutral-700">Des outils en ligne pour simplifier la gestion de vos finances.</p>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Outils numériques</h3>
+                    <p class="text-neutral-100">Des outils en ligne pour simplifier la gestion de vos finances.</p>
                 </div>
-                <div class="text-center bg-emerald-50 rounded-lg py-6 px-4 shadow-md">
+                <div class="text-center bg-emerald-600 rounded-r-full py-6 px-4 hover:shadow-xl hover:scale-105 transition-transform duration-300">
                     <div class="flex justify-center mb-4">
                         <img src="exchange.png" alt="Communauté" width="60" height="60">
                     </div>
-                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Communauté</h3>
-                    <p class="text-neutral-700">Rejoignez une communauté bienveillante pour échanger et progresser.</p>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Communauté</h3>
+                    <p class="text-neutral-100">Rejoignez une communauté bienveillante pour échanger et progresser.</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- Section Guide Preview -->
-    <section id="#" class="py-16 bg-emerald-50">
+    <section id="#" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
                 <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
@@ -397,7 +412,42 @@
             </div>
         </div>
     </section>
-    <!-- Section Call to Action -->
+<!-- Section articles -->
+    <section id="resources" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
+                    Articles récents
+                </h2>
+                <p class="text-lg text-neutral-700">
+                    Découvrez nos derniers articles pour approfondir vos connaissances financières.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                    <img src="budgetGestion.jpg" alt="Gestion de budget" class="h-48 object-cover rounded-t-lg mb-4">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Comment gérer son budget ?</h3>
+                    <p class="text-neutral-700 mb-4">Apprenez à établir un budget efficace pour mieux gérer vos finances.</p>
+                    <a href="blog.html" class="text-sm text-emerald-600 hover:underline">Lire l'article</a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                    <img src="Livrets-epargne-icon.svg" alt="Gestion de budget" class="h-48 object-cover rounded-t-lg mb-4">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Les produits d'épargne</h3>
+                    <p class="text-neutral-700 mb-4">Découvrez les produits d'épargne en un quelques minutes.</p>
+                    <a href="blog.html" class="text-sm text-emerald-600 hover:underline">Lire l'article</a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                    <img src="Lepargne.jpg" alt="Gestion de budget" class="h-48 object-cover rounded-t-lg mb-4">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">Les bases de l'épargne</h3>
+                    <p class="text-neutral-700 mb-4">Comment épargner efficacement ?</p>
+                    <a href="blog.html" class="text-sm text-emerald-600 hover:underline">Lire l'article</a>
+                </div>
+            </div>
+        </div>
+        </section>
+
+
+    <!-- Section Call to Action 
     <section id="guide" class="py-16 bg-emerald-100">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto text-center bg-white rounded-lg shadow-lg p-8">
@@ -408,7 +458,7 @@
                 <iframe width="540" height="305" src="https://sibforms.com/serve/MUIFAPef1qx2K8_YKdqPgXAP3FJ0qi_oHaSSbiBVI-2wG2tKyqDR38fY0kQqh7cwyqARs4x9o3UwNZz0dyytTtvolcp1QjDgQQkk36jiUqpOop0bn0KgLfPEyGXvqe6-5LEtOh1jlVkS5qsrT5VzQS6rDuktjrZOn8fw9g-CxeyT6tn8jo6KmoSVCIKePAY9QKMo_C1xBLYcgipo" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
             </div>
         </div>
-    </section>
+    </section> -->
     
     <!-- Section Footer -->
     <footer class="bg-[rgba(53,70,59,1)] text-white py-12">
