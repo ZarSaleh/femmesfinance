@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculateur de Dépenses</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 1rem;
+        background-color: #324942;
+        color: #333;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #0f5111;
+        margin-bottom: 1rem;
+    }
+
+    input, select, button {
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input:focus, button:focus {
+        outline: none;
+        border-color: #b1e0b3;
+    }
+
+    button {
+        background-color: #3b7f60;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #b6e9b8;
+    }
+
+    canvas {
+        margin-top: 2rem;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 1rem;
+        display: block;
+    }
+
+    .list {
+        margin-top: 2rem;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        background: #f9f9f9;
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Calculateur de Dépenses</h2>
+
+    <input type="text" id="category" placeholder="Catégorie (ex: Courses)">
+    <input type="number" id="amount" placeholder="Montant (€)">
+    <input type="date" id="date">
+    <button onclick="addExpense()">Ajouter</button>
+
+    <label for="month">Filtrer par mois :</label>
+    <input type="month" id="monthFilter" onchange="filterByMonth()">
+
+    <div class="list">
+      <h3>📋 Liste des dépenses :</h3>
+      <ul id="expense-list"></ul>
+    </div>
+
+    <canvas id="expenseChart"></canvas>
+  </div>
+
+  <script>
+    let expenses = [];
+    let chart;
+
+    function addExpense() {
+      const category = document.getElementById('category').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const date = document.getElementById('date').value;
+
+      if (category && !isNaN(amount) && date) {
+        expenses.push({ category, amount, date });
+        updateList();
+        filterByMonth(); // Met à jour le graphique
+        document.getElementById('category').value = "";
+        document.getElementById('amount').value = "";
+        document.getElementById('date').value = "";
+      }
+    }
+
+    function updateList() {
+      const list = document.getElementById('expense-list');
+      list.innerHTML = "";
+      expenses.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = `${item.category} - ${item.amount} € (${item.date})`;
+        list.appendChild(li);
+      });
+    }
+
+    function filterByMonth() {
+      const month = document.getElementById('monthFilter').value;
+      const filtered = expenses.filter(e => e.date.startsWith(month));
+
+      const grouped = {};
+      filtered.forEach(e => {
+        grouped[e.category] = (grouped[e.category] || 0) + e.amount;
+      });
+
+      const labels = Object.keys(grouped);
+      const data = Object.values(grouped);
+
+      if (chart) chart.destroy();
+      const ctx = document.getElementById('expenseChart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Dépenses',
+            data: data,
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#4BC0C0',
+              '#9966FF',
+              '#FF9F40'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
