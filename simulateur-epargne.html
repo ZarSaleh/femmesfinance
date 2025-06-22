@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulateur d’Épargne</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #265443;
+    }
+    form, .resultats {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      width: 100%;
+    }
+    button {
+      background: #3f886d;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    canvas {
+      margin: 40px auto;
+      display: block;
+      max-width: 700px;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #63aa90;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Simulateur d'Épargne</h1>
+
+<form id="form-simulation">
+  <label>Capital initial (€) :</label>
+  <input type="number" id="capital" value="1000" required />
+  
+  <label>Versement mensuel (€) :</label>
+  <input type="number" id="mensuel" value="100" required />
+  
+  <label>Durée (en années) :</label>
+  <input type="number" id="duree" value="10" required />
+  
+  <label>Produits d’épargne :</label>
+  <select id="produits" multiple size="6">
+    <option value="Livret A">Livret A (2.4 %)</option>
+    <option value="LDDS">LDDS (2.4 %)</option>
+    <option value="LEP">LEP (3.5 %)</option>
+    <option value="PEL">PEL (1.75 %)</option>
+    <option value="Assurance-vie">Assurance-vie (2.5 %)</option>
+    <option value="ETF">ETF Monde (7 %)</option>
+  </select>
+  
+  <button type="submit">Simuler</button>
+</form>
+
+<canvas id="chart-epargne"></canvas>
+
+<div class="resultats">
+  <h2>Résultats</h2>
+  <table id="table-resultats">
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Capital final (€)</th>
+        <th>Intérêts générés (€)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  const taux = {
+    "Livret A": 0.024,
+    "LDDS": 0.024,
+    "LEP": 0.0175,
+    "PEL": 0.025,
+    "Assurance-vie": 0.025,
+    "ETF": 0.07
+  };
+
+  const form = document.getElementById("form-simulation");
+  const ctx = document.getElementById("chart-epargne").getContext("2d");
+  let chart;
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const capitalInitial = parseFloat(document.getElementById("capital").value);
+    const versementMensuel = parseFloat(document.getElementById("mensuel").value);
+    const dureeAnnees = parseInt(document.getElementById("duree").value);
+    const produits = Array.from(document.getElementById("produits").selectedOptions).map(opt => opt.value);
+    const dureeMois = dureeAnnees * 12;
+
+    const datasets = [];
+    const tableBody = document.querySelector("#table-resultats tbody");
+    tableBody.innerHTML = "";
+
+    produits.forEach(produit => {
+      const tauxMensuel = taux[produit] / 12;
+      let capital = capitalInitial;
+      const data = [];
+
+      for (let i = 0; i < dureeMois; i++) {
+        capital *= (1 + tauxMensuel);
+        capital += versementMensuel;
+        data.push(capital.toFixed(2));
+      }
+
+      const interets = capital - (capitalInitial + versementMensuel * dureeMois);
+
+      datasets.push({
+        label: produit,
+        data: data,
+        fill: false,
+        borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+        tension: 0.1
+      });
+
+      const row = `<tr>
+        <td>${produit}</td>
+        <td>${capital.toFixed(2)}</td>
+        <td>${interets.toFixed(2)}</td>
+      </tr>`;
+      tableBody.insertAdjacentHTML("beforeend", row);
+    });
+
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({ length: dureeMois }, (_, i) => `${i+1}`),
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Évolution de votre épargne'
+          }
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

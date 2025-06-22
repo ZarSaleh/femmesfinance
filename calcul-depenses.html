@@ -100,6 +100,7 @@
     <div class="list">
       <h3>📋 Liste des dépenses :</h3>
       <ul id="expense-list"></ul>
+      <button id="export-pdf" style="margin-top: 15px;">📄 Exporter en PDF</button>
     </div>
 
     <canvas id="expenseChart"></canvas>
@@ -174,7 +175,39 @@
           }
         }
       });
+
+      document.getElementById("export-pdf").addEventListener("click", () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const selectedMonth = monthFilter.value;
+        const title = selectedMonth ? `Dépenses - Mois ${selectedMonth}` : "Toutes les Dépenses";
+
+        doc.setFontSize(16);
+        doc.text(title, 10, 10);
+
+        let y = 20;
+        const filtered = selectedMonth ? expenses.filter(e => e.date.startsWith(selectedMonth)) : expenses;
+
+        if (filtered.length === 0) {
+          doc.text("Aucune dépense enregistrée pour ce mois.", 10, y);
+        } else {
+          filtered.forEach((item, index) => {
+            doc.text(`${index + 1}. ${item.category} : ${item.amount} € (${item.date})`, 10, y);
+            y += 10;
+            if (y > 280) {
+              doc.addPage();
+              y = 10;
+            }
+          });
+        }
+
+        doc.save("mes-depenses.pdf");
+      });
     }
   </script>
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
