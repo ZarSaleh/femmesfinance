@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulateur d’intérêts composés pour calculer la croissance de votre capital avec des versements mensuels. Visualisez les résultats avec un graphique et exportez en CSV ou PDF.">
+    <meta name="keywords" content="simulateur, intérêts composés, capital, versements mensuels, graphique, export CSV, export PDF">
+    <meta name="author" content="Femmes Finance">
+    <link rel="icon" href="loogo-ff.svg" type="image/x-icon">
+    <link rel="canonical" href="https://www.femmesfinance.fr/simulateur-interet.html">
+    <meta property="og:title" content="Simulateur d’intérêts composés">
+    <meta property="og:description" content="Simulateur d’intérêts composés pour calculer la croissance de votre capital avec des versements mensuels">
+  <title>Simulateur d’intérêts composés</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: auto; background: #f9f9f9; padding: 20px; }
+    h1, h2 { text-align: center; color: #333; }
+    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    label { display: block; margin: 10px 0 5px; }
+    input, button, select { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    #results table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    #results th, #results td { border: 1px solid #ddd; padding: 8px; text-align: right; }
+    #results th { background: #f0f0f0; }
+    .actions { text-align: center; margin-top: 20px; }
+    .btn { display: inline-block; margin: 5px; padding: 10px 20px; background: #1ea49c; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #4bd4bf; }
+  </style>
+</head>
+<body>
+  <h1>Simulateur d’intérêts composés</h1>
+  <a href="index.html" style="color: #4baba1; text-decoration: none; font-size: 16px;">← Retour</a>
+  <form id="sim-form">
+    <label>Capital initial (€) :</label>
+    <input type="number" id="capital" value="1000" min="0" step="0.01" required>
+    <label>Versements mensuels (€) :</label>
+    <input type="number" id="versement" value="100" min="0" step="0.01" required>
+    <label>Taux annuel (%) :</label>
+    <input type="number" id="taux" value="5" min="0" step="0.01" required>
+    <label>Durée (années) :</label>
+    <input type="number" id="annees" value="10" min="1" step="1" required>
+    <button type="submit" class="btn">Calculer</button>
+  </form>
+
+  <canvas id="chart" width="600" height="300"></canvas>
+
+  <div class="actions">
+    <button id="export-csv" class="btn">Exporter CSV</button>
+    <button id="export-pdf" class="btn">Exporter PDF</button>
+  </div>
+
+  <div id="results"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    let data = [];
+
+    document.getElementById('sim-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const C0 = parseFloat(document.getElementById('capital').value);
+      const M = parseFloat(document.getElementById('versement').value);
+      const r = parseFloat(document.getElementById('taux').value) / 100;
+      const years = parseInt(document.getElementById('annees').value);
+      const monthlyRate = r / 12;
+
+      let balance = C0;
+      data = [];
+      const tableRows = [];
+
+      for (let m = 1; m <= years * 12; m++) {
+        balance = balance * (1 + monthlyRate) + M;
+        if (m % 12 === 0) {
+          const year = m / 12;
+          data.push({ year, balance: +balance.toFixed(2) });
+          tableRows.push(`<tr>
+            <td>${year}</td>
+            <td>${data[data.length - 1].balance.toLocaleString()}</td>
+          </tr>`);
+        }
+      }
+
+      // Graphique
+      const ctx = document.getElementById('chart').getContext('2d');
+      if (window.simChart) simChart.destroy();
+      window.simChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.map(d => d.year),
+          datasets: [{
+            label: 'Montant capitalisé (€)',
+            data: data.map(d => d.balance),
+            backgroundColor: 'rgba(54,162,235,0.2)',
+            borderColor: 'rgba(54,162,235,1)',
+            tension: 0.2,
+            fill: true
+          }]
+        },
+        options: {
+          scales: { x: { title: { display: true, text: 'Année' } },
+                    y: { title: { display: true, text: 'Montant (€)' } } }
+        }
+      });
+
+      // Tableau
+      document.getElementById('results').innerHTML = `
+        <h2>Résultats annuels</h2>
+        <table id="result-table">
+          <thead><tr><th>Année</th><th>Capital (€)</th></tr></thead>
+          <tbody>${tableRows.join('')}</tbody>
+        </table>`;
+    });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+      if (data.length === 0) return;
+      let csv = 'Année,Capital (€)\n';
+      data.forEach(d => {
+        csv += `${d.year},${d.balance}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'simulation.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    document.getElementById('export-pdf').addEventListener('click', () => {
+      if (data.length === 0) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text('Résultats de la simulation', 10, 10);
+      let y = 20;
+      doc.text('Année | Capital (€)', 10, y);
+      y += 10;
+      data.forEach(d => {
+        doc.text(`${d.year} | ${d.balance}`, 10, y);
+        y += 10;
+      });
+      doc.save('simulation.pdf');
+    });
+
+    // Calcul initial
+    document.getElementById('sim-form').dispatchEvent(new Event('submit'));
+  </script>
+</body>
+</html>

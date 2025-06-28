@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Suivi de Portefeuille d'Investissement</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; background: #f9f9f9; padding: 20px; }
+    h1, h2 { text-align: center; }
+    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    label { display: block; margin: 10px 0 5px; }
+    input, select, button { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    .actions { text-align: center; margin-top: 20px; }
+    .btn { display: inline-block; margin: 5px; padding: 10px 20px; background: #1ea49c; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #4bd4bf; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+  <h1>Suivi de Portefeuille d'Investissement</h1>
+  <a href="index.html" style="color: #4baba1; text-decoration: none; font-size: 16px;">← Retour</a>
+
+  <form id="portfolio-form">
+    <label>Nom de l'actif :</label>
+    <input type="text" id="asset-name" required>
+    <label>Type d'actif :</label>
+    <select id="asset-type">
+      <option>Action</option>
+      <option>Obligation</option>
+      <option>ETF</option>
+      <option>Crypto</option>
+      <option>Autre</option>
+    </select>
+    <label>Quantité :</label>
+    <input type="number" id="quantity" step="0.01" min="0" required>
+    <label>Prix d'achat (€) :</label>
+    <input type="number" id="purchase-price" step="0.01" min="0" required>
+    <button type="submit" class="btn">Ajouter</button>
+  </form>
+
+  <canvas id="pieChart" height="300"></canvas>
+
+  <div class="actions">
+    <button id="export-csv" class="btn">Exporter CSV</button>
+    <button id="export-pdf" class="btn">Exporter PDF</button>
+  </div>
+
+  <div id="portfolio-table"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    let portfolio = [];
+
+    const form = document.getElementById('portfolio-form');
+    const tableDiv = document.getElementById('portfolio-table');
+    const ctx = document.getElementById('pieChart').getContext('2d');
+    let pieChart;
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('asset-name').value.trim();
+      const type = document.getElementById('asset-type').value;
+      const quantity = parseFloat(document.getElementById('quantity').value);
+      const price = parseFloat(document.getElementById('purchase-price').value);
+      const total = +(quantity * price).toFixed(2);
+
+      portfolio.push({ name, type, quantity, price, total });
+
+      form.reset();
+      updateTable();
+      updateChart();
+    });
+
+    function updateTable() {
+      let rows = portfolio.map((a, i) => `
+        <tr>
+          <td>${a.name}</td>
+          <td>${a.type}</td>
+          <td>${a.quantity}</td>
+          <td>${a.price.toFixed(2)}</td>
+          <td>${a.total.toFixed(2)}</td>
+        </tr>`).join('');
+      tableDiv.innerHTML = `
+        <h2>Portefeuille</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Actif</th>
+              <th>Type</th>
+              <th>Quantité</th>
+              <th>Prix d'achat (€)</th>
+              <th>Valeur totale (€)</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    function updateChart() {
+      const labels = portfolio.map(a => a.name);
+      const data = portfolio.map(a => a.total);
+      const colors = portfolio.map(() => `hsl(${Math.random() * 360},70%,60%)`);
+
+      if (pieChart) pieChart.destroy();
+      pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            backgroundColor: colors
+          }]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+    }
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+      if (portfolio.length === 0) return;
+      let csv = 'Actif,Type,Quantité,Prix d\'achat (€),Valeur totale (€)\n';
+      portfolio.forEach(a => {
+        csv += `${a.name},${a.type},${a.quantity},${a.price},${a.total}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'portefeuille.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    document.getElementById('export-pdf').addEventListener('click', () => {
+      if (portfolio.length === 0) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text('Portefeuille d\'Investissement', 10, 10);
+      let y = 20;
+      doc.text('Actif | Type | Qté | Prix | Valeur Totale', 10, y);
+      y += 10;
+      portfolio.forEach(a => {
+        doc.text(`${a.name} | ${a.type} | ${a.quantity} | ${a.price} | ${a.total}`, 10, y);
+        y += 10;
+      });
+      doc.save('portefeuille.pdf');
+    });
+  </script>
+</body>
+</html>

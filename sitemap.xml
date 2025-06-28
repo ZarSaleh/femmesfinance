@@ -8,4 +8,8 @@
     <loc>https://femmesfinance.fr/#guide</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://femmesfinance.fr/#contact</loc>
+    <priority>0.6</priority>
+  </url>
 </urlset>
