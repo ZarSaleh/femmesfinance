@@ -29,26 +29,27 @@
 </head>
 
 <body>
+    
     <script>
-        window.addEventListener('mouseover', initLandbot, { once: true });
-        window.addEventListener('touchstart', initLandbot, { once: true });
-        var myLandbot;
-        function initLandbot() {
-          if (!myLandbot) {
-            var s = document.createElement('script');
-            s.type = "module"
-            s.async = true;
-            s.addEventListener('load', function() {
-              myLandbot = new Landbot.Popup({
-                configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2926170-9713VTGIULNKP5K7/index.json',
-              });
-            });
-            s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
-            var x = document.getElementsByTagName('script')[0];
-            x.parentNode.insertBefore(s, x);
-          }
-        }
-        </script>
+window.addEventListener('mouseover', initLandbot, { once: true });
+window.addEventListener('touchstart', initLandbot, { once: true });
+var myLandbot;
+function initLandbot() {
+  if (!myLandbot) {
+    var s = document.createElement('script');
+    s.type = "module"
+    s.async = true;
+    s.addEventListener('load', function() {
+      myLandbot = new Landbot.Popup({
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2926170-9713VTGIULNKP5K7/index.json',
+      });
+    });
+    s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  }
+}
+</script>
     
             
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +61,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #e8e8e2;
+  background: #f2f2ee;
   padding: 10px 20px;
 }
 
@@ -210,13 +211,13 @@
                 </h3>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="#guide" class="cta-button">
-                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-6 h-auto text-base rounded-full">
+                        <button class="bg-yellow-500 hover:bg-emerald-300 text-white px-6 py-6 h-auto text-base rounded-full">
                             Recevoir mon guide gratuit
                         </button>
                     </a>
                     <a href="#more">
                         <button 
-                            class="border border-emerald-900 text-emerald-700 hover:bg-emerald-50 px-6 py-6 h-auto text-base rounded-full">
+                            class="border border-yellow-400 text-emerald-700 hover:bg-emerald-50 px-6 py-6 h-auto text-base rounded-full">
                             En savoir plus
                         </button>
                     </a>
@@ -224,13 +225,14 @@
             </div>
             <div class="md:w-1/3 flex justify-end">
                 <dotlottie-player
-                    src="https://lottie.host/8b61335a-7b5e-4285-bf9c-fdc9dcfb2450/7dzZgE2Gd9.lottie"
-                    background="transparent"
-                    speed="1"
-                    style="width: 100%; max-width: 700px; height: auto"
-                    loop
-                    autoplay>
-                </dotlottie-player>
+  src="https://lottie.host/66de29bb-77a5-41d2-abd6-7a5f9e0f5043/AZhfX49dxd.lottie"
+  background="transparent"
+  speed="1"
+  style="width: 300px; height: 300px"
+  loop
+  autoplay
+></dotlottie-player>
+
             </div>
         </div>
     </section>
@@ -262,7 +264,7 @@
             }
         }
     </style>
-    <section class="py-4 bg-emerald-600">
+    <section class="py-4 bg-cyan-400">
         <div class="container mx-auto px-4 text-center">
             <p id="animated-text" class="text-lg font-bold italic text-white"></p>
         </div>
@@ -308,7 +310,7 @@
 
     <!-- Section feature -->
 
-    <section class="py-16 bg-emerald-100">
+    <section class="py-16 bg-neutral-100">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center mb-12">
                 <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
@@ -379,7 +381,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Calculateur dépenses</h3>
                     <p class="text-neutral-700 mb-4">Analysez vos dépenses et optimisez votre budget.</p>
-                    <a href="calcul-depenses.html" class="bg-emerald-500 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="calcul-depenses.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -390,7 +392,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Simulateur d'épargne</h3>
                     <p class="text-neutral-700 mb-4">Planifiez vos économies pour atteindre vos objectifs.</p>
-                    <a href="simulateur-epargne.html" class="bg-emerald-500 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="simulateur-epargne.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -401,7 +403,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Tableau d'investissement</h3>
                     <p class="text-neutral-700 mb-4">Découvrez comment investir intelligemment.</p>
-                    <a href="suivi-portefeuille.html" class="bg-emerald-500 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="suivi-portefeuille.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -412,7 +414,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Simulateur d'intérêts composés</h3>
                     <p class="text-neutral-700 mb-4">Comprenez le pouvoir des intérêts composés.</p>
-                    <a href="simulateur-interet.html" class="bg-emerald-500 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="simulateur-interet.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -429,8 +431,7 @@
                 <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
                     L'essentiel de la gestion de finance
                 </h2>
-                <ul class="list-disc pl-5 text-lg text-neutral-700 space-y-4">
-                    <li><strong>L'éducation financière au féminin</strong></li>
+                <ul class=" pl-5 text-lg text-neutral-700 space-y-4">
                     <li><strong>Pourquoi investir ?</strong></li>
                     <li><strong>Comment définir ses objectifs financiers</strong></li>
                     <li><strong>Les fondamentaux de l'investissement</strong></li>
