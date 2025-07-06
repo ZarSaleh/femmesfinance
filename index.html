@@ -61,7 +61,7 @@ function initLandbot() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f2f2ee;
+  background: #213826;
   padding: 10px 20px;
 }
 
@@ -77,6 +77,7 @@ function initLandbot() {
   background: none;
   border: none;
   cursor: pointer;
+    color: white;
 }
 
 /* Responsive : version mobile */
@@ -109,7 +110,7 @@ function initLandbot() {
             <button class="menu-toggle" onclick="toggleMenu(); this.style.display = 'none';">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li class="relative"></li>
-                    <button onclick="toggleDropdown()" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 focus:outline-none">
+                    <button onclick="toggleDropdown()" class="text-sm font-medium text-white hover:text-white focus:outline-none">
                         Fonctionnalités
                     </button>
                     <ul id="dropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2">
@@ -124,10 +125,10 @@ function initLandbot() {
                         dropdownMenu.classList.toggle('hidden');
                     }
                 </script>
-                <li><a href="#appros" class="text-sm font-medium text-emerald-700 hover:text-emerald-300">À propos</a></li>
-                <li><a href="blog.html" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
-                <li><a href="#guide" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline">Guide</a></li>
-                <li><a href="#contact" class="text-sm font-medium text-emerald-700 hover:text-emerald-300 hover:underline">Contact</a></li>
+                <li><a href="#appros" class="text-sm font-medium text-white hover:text-white">À propos</a></li>
+                <li><a href="blog.html" class="text-sm font-medium text-white hover:text-white hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                <li><a href="#guide" class="text-sm font-medium text-white hover:text-white hover:underline">Guide</a></li>
+                <li><a href="#contact" class="text-sm font-medium text-white hover:text-white hover:underline">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -211,13 +212,13 @@ function initLandbot() {
                 </h3>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="#guide" class="cta-button">
-                        <button class="bg-yellow-500 hover:bg-emerald-300 text-white px-6 py-6 h-auto text-base rounded-full">
+                        <button class="bg-emerald-700 hover:bg-yellow-500 text-white px-6 py-6 h-auto text-base rounded-full">
                             Recevoir mon guide gratuit
                         </button>
                     </a>
                     <a href="#more">
                         <button 
-                            class="border border-yellow-400 text-emerald-700 hover:bg-emerald-50 px-6 py-6 h-auto text-base rounded-full">
+                            class="border border-emeral-800 text-emerald-700 hover:bg-emerald-50 px-6 py-6 h-auto text-base rounded-full">
                             En savoir plus
                         </button>
                     </a>
@@ -264,19 +265,20 @@ function initLandbot() {
             }
         }
     </style>
-    <section class="py-4 bg-cyan-400">
+    <section class="py-4 bg-emerald-600">
         <div class="container mx-auto px-4 text-center">
             <p id="animated-text" class="text-lg font-bold italic text-white"></p>
         </div>
         <script>
             const phrases = [
-                "Gére, épargne, investis avec stratégie",
-                "Construisez un avenir serein",
-                "Apprendre à gérer son argent, c'est s'offrir des choix",
-                "Épargne aujourd'hui, investis demain",
-                "Ton argent mérite de grandir"
+                "Gérer son budget",
+                "Épargner son argent",
+                "Investir son argent",
+                "Découvrir les produits d'épargne",
+                "Définir ses objectifs financiers",
+                "Diversifier son portefeuille",
+                "Comprendre les intérêts composés",
             ];
-            phrases.push("Construis ton avenir financier dés maintenant");
             let index = 0;
             const animatedTextElement = document.getElementById("animated-text");
 
@@ -285,11 +287,11 @@ function initLandbot() {
                 index = (index + 1) % phrases.length;
             }
 
-            setInterval(updateText, 2000);
             updateText(); // Initialize with the first phrase
+            setInterval(updateText, 2000);
         </script>
     </section>
-    
+    <!--
     <section id="apropos" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center mb-12">
@@ -306,7 +308,7 @@ function initLandbot() {
                 </p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Section feature -->
 
@@ -359,7 +361,7 @@ function initLandbot() {
     <section class="py-14 "></section>
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto text-center">
-                <blockquote class="text-2xl md:text-3xl italic text-emerald-800">
+                <blockquote class="text-2xl md:text-3xl  text-emerald-800">
                     “Investir en soi est le meilleur investissement que l'on puisse faire.”
                 </blockquote>
             </div>
@@ -381,7 +383,7 @@ function initLandbot() {
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Calculateur dépenses</h3>
                     <p class="text-neutral-700 mb-4">Analysez vos dépenses et optimisez votre budget.</p>
-                    <a href="calcul-depenses.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="calcul-depenses.html" class="bg-yellow-400 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -392,7 +394,7 @@ function initLandbot() {
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Simulateur d'épargne</h3>
                     <p class="text-neutral-700 mb-4">Planifiez vos économies pour atteindre vos objectifs.</p>
-                    <a href="simulateur-epargne.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="simulateur-epargne.html" class="bg-yellow-400 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -403,7 +405,7 @@ function initLandbot() {
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Tableau d'investissement</h3>
                     <p class="text-neutral-700 mb-4">Découvrez comment investir intelligemment.</p>
-                    <a href="suivi-portefeuille.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="suivi-portefeuille.html" class="bg-yellow-400 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -414,7 +416,7 @@ function initLandbot() {
                     </div>
                     <h3 class="text-xl font-bold text-emerald-800 mb-2">Simulateur d'intérêts composés</h3>
                     <p class="text-neutral-700 mb-4">Comprenez le pouvoir des intérêts composés.</p>
-                    <a href="simulateur-interet.html" class="bg-emerald-300 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
+                    <a href="simulateur-interet.html" class="bg-yellow-400 hover:bg-emerald-300 text-white px-6 py-3 rounded-full inline-block shadow-md">
                         Accéder
                     </a>
                 </div>
@@ -424,7 +426,304 @@ function initLandbot() {
             </div>
         </div>
     </section>
+
+<!-- Section Bourse -->
+<section id="bourse" class="py-16 bg-neutral-100">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
+                Les ETF & leur répartition sectorielle 
+            </h2>
+        </div>
+        <div class="bourse-section flex flex-col md:flex-row gap-8 justify-center">
+            <!-- ETF CAC 40 Card -->
+            <div class="etf-card flex-1">
+                <h3>ETF CAC 40</h3>
+                <p>Les 40 plus grandes entreprises françaises.</p>
+                <button type="button" id="btn-cac40" onclick="toggleDetails('etf-details', 'sectorChart', 'cac40', this)">En savoir plus</button>
+                <div id="etf-details" style="display:none; margin-top:1rem;">
+                    <canvas id="sectorChart" width="300" height="300"></canvas>
+                    <button type="button" onclick="exportCSV('cac40')" style="margin-top:1rem;">Exporter la liste (CSV)</button>
+                </div>
+            </div>
+            <!-- ETF NASDAQ 100 Card -->
+            <div class="etf-card flex-1">
+                <h3>ETF Nasdaq 100</h3>
+                <p>Top 20 des 100 plus grandes entreprises technologiques américaines.</p>
+                <button type="button" id="btn-nasdaq" onclick="toggleDetails('etf-nasdaq-details', 'nasdaqChart', 'nasdaq', this)">En savoir plus</button>
+                <div id="etf-nasdaq-details" style="display:none; margin-top:1rem;">
+                    <canvas id="nasdaqChart" width="300" height="300"></canvas>
+                    <button type="button" onclick="exportCSV('nasdaq')" style="margin-top:1rem;">Exporter la liste (CSV)</button>
+                </div>
+            </div>
+            <!-- ETF MSCI World Card -->
+            <div class="etf-card flex-1">
+                <h3>ETF MSCI World</h3>
+                <p>Top 20 des 1 500 grandes entreprises mondiales développées.</p>
+                <button type="button" id="btn-msci" onclick="toggleDetails('etf-msci-details', 'msciChart', 'msci', this)">En savoir plus</button>
+                <div id="etf-msci-details" style="display:none; margin-top:1rem;">
+                    <canvas id="msciChart" width="300" height="300"></canvas>
+                    <button type="button" onclick="exportCSV('msci')" style="margin-top:1rem;">Exporter la liste (CSV)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .bourse-section {
+            padding: 2rem 0;
+            font-family: Arial, sans-serif;
+        }
+        .etf-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .etf-card button {
+            margin-top: 1rem;
+            background-color: #1c3429;
+            color: rgb(237, 243, 241);
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .etf-card button:hover {
+            background-color: #f5d75e;
+        }
+        @media (max-width: 768px) {
+            .bourse-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // CAC 40 sectors
+        const sectors = {
+            "Luxe": 12,
+            "Banque / Assurance": 18,
+            "Énergie": 10,
+            "Aéronautique & Défense": 10,
+            "Technologie / Électronique": 8,
+            "Agroalimentaire / Cosmétique": 8,
+            "Automobile / Équipements": 8,
+            "Construction / BTP / Infra": 7,
+            "Services / Médias": 7,
+            "Santé / Pharma": 6,
+            "Immobilier / Divers": 6
+        };
+
+        // Nasdaq 100 sectors (approximate, for demo)
+        const nasdaqSectors = {
+            "Technologie": 55,
+            "Consommation discrétionnaire": 17,
+            "Santé": 7,
+            "Industrie": 6,
+            "Télécommunications": 5,
+            "Consommation courante": 4,
+            "Finance": 3,
+            "Énergie": 2,
+            "Immobilier": 1
+        };
+
+        // MSCI World sectors (approximate, for demo)
+        const msciSectors = {
+            "Technologie": 22,
+            "Finance": 15,
+            "Santé": 13,
+            "Industrie": 11,
+            "Consommation discrétionnaire": 11,
+            "Consommation courante": 7,
+            "Énergie": 5,
+            "Matériaux": 4,
+            "Services de communication": 7,
+            "Immobilier": 3,
+            "Utilités": 2
+        };
+
+        let chartInstances = {};
+
+        function toggleDetails(detailsId, chartId, etf, btn) {
+            const section = document.getElementById(detailsId);
+            const isOpen = section.style.display === "block";
+            // Fermer tous les autres
+            ['etf-details', 'etf-nasdaq-details', 'etf-msci-details'].forEach(function(id) {
+                if (id !== detailsId) {
+                    document.getElementById(id).style.display = "none";
+                    const otherBtn = document.querySelector(`[onclick*="${id}"]`);
+                    if (otherBtn) otherBtn.textContent = "En savoir plus";
+                }
+            });
+            // Toggle current
+            if (!isOpen) {
+                section.style.display = "block";
+                btn.textContent = "Fermer";
+                if (!chartInstances[chartId]) {
+                    let ctx = document.getElementById(chartId).getContext('2d');
+                    let data, labels, colors, title;
+                    if (etf === 'cac40') {
+                        labels = Object.keys(sectors);
+                        data = Object.values(sectors);
+                        colors = [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#2ecc71', '#9b59b6',
+                            '#f39c12', '#e74c3c', '#3498db', '#1abc9c', '#7f8c8d', '#bdc3c7'
+                        ];
+                        title = 'Répartition sectorielle du CAC 40';
+                    } else if (etf === 'nasdaq') {
+                        labels = Object.keys(nasdaqSectors);
+                        data = Object.values(nasdaqSectors);
+                        colors = [
+                            '#36A2EB', '#FF6384', '#FFCE56', '#2ecc71', '#9b59b6',
+                            '#f39c12', '#e74c3c', '#1abc9c', '#7f8c8d'
+                        ];
+                        title = 'Répartition sectorielle du Nasdaq 100';
+                    } else if (etf === 'msci') {
+                        labels = Object.keys(msciSectors);
+                        data = Object.values(msciSectors);
+                        colors = [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#2ecc71', '#9b59b6',
+                            '#f39c12', '#e74c3c', '#3498db', '#1abc9c', '#7f8c8d', '#bdc3c7'
+                        ];
+                        title = 'Répartition sectorielle du MSCI World';
+                    }
+                    chartInstances[chartId] = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: data,
+                                backgroundColor: colors
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: title
+                                }
+                            }
+                        }
+                    });
+                }
+            } else {
+                section.style.display = "none";
+                btn.textContent = "En savoir plus";
+            }
+        }
+
+        function exportCSV(etf) {
+            let csvData;
+            if (etf === 'cac40') {
+                csvData = [
+                    ["Entreprise", "Secteur"],
+                    ["LVMH", "Luxe"],
+                    ["Kering", "Luxe"],
+                    ["L'Oréal", "Luxe"],
+                    ["BNP Paribas", "Banque / Assurance"],
+                    ["Crédit Agricole", "Banque / Assurance"],
+                    ["Société Générale", "Banque / Assurance"],
+                    ["AXA", "Banque / Assurance"],
+                    ["TotalEnergies", "Énergie"],
+                    ["Engie", "Énergie"],
+                    ["Airbus", "Aéronautique & Défense"],
+                    ["Safran", "Aéronautique & Défense"],
+                    ["Thales", "Aéronautique & Défense"],
+                    ["STMicroelectronics", "Technologie / Électronique"],
+                    ["Capgemini", "Technologie / Électronique"],
+                    ["Danone", "Agroalimentaire / Cosmétique"],
+                    ["Pernod Ricard", "Agroalimentaire / Cosmétique"],
+                    ["Michelin", "Automobile / Équipements"],
+                    ["Valeo", "Automobile / Équipements"],
+                    ["Renault", "Automobile / Équipements"],
+                    ["Stellantis", "Automobile / Équipements"],
+                    ["Bouygues", "Construction / BTP / Infra"],
+                    ["Vinci", "Construction / BTP / Infra"],
+                    ["Veolia", "Services / Médias"],
+                    ["Vivendi", "Services / Médias"],
+                    ["Sanofi", "Santé / Pharma"],
+                    ["EssilorLuxottica", "Santé / Pharma"],
+                    ["Unibail-Rodamco", "Immobilier / Divers"]
+                ];
+            } else if (etf === 'nasdaq') {
+                csvData = [
+                    ["Entreprise", "Secteur"],
+                    ["Apple", "Technologie"],
+                    ["Microsoft", "Technologie"],
+                    ["Amazon", "Consommation discrétionnaire"],
+                    ["NVIDIA", "Technologie"],
+                    ["Meta Platforms", "Technologie"],
+                    ["Alphabet (Google)", "Technologie"],
+                    ["Tesla", "Consommation discrétionnaire"],
+                    ["Broadcom", "Technologie"],
+                    ["PepsiCo", "Consommation courante"],
+                    ["Costco", "Consommation courante"],
+                    ["Adobe", "Technologie"],
+                    ["Netflix", "Consommation discrétionnaire"],
+                    ["Intel", "Technologie"],
+                    ["Comcast", "Télécommunications"],
+                    ["Cisco", "Technologie"],
+                    ["T-Mobile US", "Télécommunications"],
+                    ["Texas Instruments", "Technologie"],
+                    ["Advanced Micro Devices", "Technologie"],
+                    ["Qualcomm", "Technologie"],
+                    ["Intuit", "Technologie"]
+                ];
+            } else if (etf === 'msci') {
+                csvData = [
+                    ["Entreprise", "Secteur"],
+                    ["Apple", "Technologie"],
+                    ["Microsoft", "Technologie"],
+                    ["Alphabet (Google)", "Technologie"],
+                    ["Amazon", "Consommation discrétionnaire"],
+                    ["NVIDIA", "Technologie"],
+                    ["JPMorgan Chase", "Finance"],
+                    ["Johnson & Johnson", "Santé"],
+                    ["Visa", "Finance"],
+                    ["UnitedHealth Group", "Santé"],
+                    ["Nestlé", "Consommation courante"],
+                    ["Procter & Gamble", "Consommation courante"],
+                    ["Roche", "Santé"],
+                    ["ExxonMobil", "Énergie"],
+                    ["ASML", "Technologie"],
+                    ["Toyota", "Consommation discrétionnaire"],
+                    ["Novartis", "Santé"],
+                    ["LVMH", "Consommation discrétionnaire"],
+                    ["Samsung", "Technologie"],
+                    ["Bank of America", "Finance"],
+                    ["Shell", "Énergie"]
+                ];
+            }
+            let csvContent = "data:text/csv;charset=utf-8," + csvData.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", 
+                etf === 'cac40' ? "entreprises_etf_cac40.csv" : 
+                etf === 'nasdaq' ? "entreprises_etf_nasdaq100.csv" : 
+                "entreprises_etf_msciworld.csv"
+            );
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</section>
+
     <!-- Section Guide Preview -->
+
+    <!--
+  
     <section id="#" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
@@ -444,7 +743,7 @@ function initLandbot() {
                     class="rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out w-3/4">
             </div>
         </div>
-    </section>
+    </section> -->
 <!-- Section articles -->
     <section id="resources" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
