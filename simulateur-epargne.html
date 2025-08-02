@@ -23,19 +23,24 @@
       text-align: center;
       color: #265443;
     }
-    form, .resultats {
+    .container {
       max-width: 800px;
       margin: auto;
+    }
+    form, .resultats {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      width: 100%;
+      box-sizing: border-box;
     }
     input, select, button {
       padding: 10px;
       margin: 10px 0;
       font-size: 16px;
       width: 100%;
+      box-sizing: border-box;
     }
     button {
       background: #3f886d;
@@ -66,48 +71,52 @@
   </style>
 </head>
 <body>
-<a href="index.html" style="text-decoration: none; color: #3b7f60; font-weight: bold;">← Retour</a>
-<h1>Simulateur d'Épargne</h1>
+  <div class="container">
+    <form id="form-simulation">
+      <a href="index.html" style="text-decoration: none; color: #3b7f60; font-weight: bold;">←</a>
+    <h1>Simulateur d'Épargne</h1>
+      <label for="capital">Capital initial (€) :</label>
+      <input type="number" id="capital" value="1000" required />
 
-<form id="form-simulation">
-  <label>Capital initial (€) :</label>
-  <input type="number" id="capital" value="1000" required />
-  
-  <label>Versement mensuel (€) :</label>
-  <input type="number" id="mensuel" value="100" required />
-  
-  <label>Durée (en années) :</label>
-  <input type="number" id="duree" value="10" required />
-  
-  <label>Produits d’épargne :</label>
-  <select id="produits" multiple size="6">
-    <option value="Livret A">Livret A (2.4 %)</option>
-    <option value="LDDS">LDDS (2.4 %)</option>
-    <option value="LEP">LEP (3.5 %)</option>
-    <option value="PEL">PEL (1.75 %)</option>
-    <option value="Assurance-vie">Assurance-vie (2.5 %)</option>
-    <option value="ETF">ETF Monde (7 %)</option>
-  </select>
-  
-  <button type="submit">Simuler</button>
-</form>
+      <label for="mensuel">Versement mensuel (€) :</label>
+      <input type="number" id="mensuel" value="100" required />
 
-<canvas id="chart-epargne"></canvas>
+      <label for="duree">Durée (en années) :</label>
+      <input type="number" id="duree" value="10" required />
 
-<div class="resultats">
-  <h2>Résultats</h2>
-  <table id="table-resultats">
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Capital final (€)</th>
-        <th>Intérêts générés (€)</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+      <label for="produits">Produits d’épargne :</label>
+      <select id="produits" multiple size="6">
+        <option value="Livret A">Livret A (1.7 %)</option>
+        <option value="LDDS">LDDS (1.7 %)</option>
+        <option value="LEP">LEP (2.7 %)</option>
+        <option value="PEL">PEL (1.75 %)</option>
+        <option value="Assurance-vie">Assurance-vie (2.5 %)</option>
+        <option value="ETF">ETF Monde (7 %)</option>
+      </select>
 
+      <button type="submit">Simuler</button>
+    </form>
+
+    <canvas id="chart-epargne"></canvas>
+
+    <div class="resultats">
+      <h2>Résultats</h2>
+      <table id="table-resultats">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Capital final (€)</th>
+            <th>Intérêts générés (€)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="actions">
+      <button id="export-csv">Exporter en CSV</button>
+      <button id="export-pdf">Exporter en PDF</button>
+    </div>
+  </div>
 <script>
   const taux = {
     "Livret A": 0.024,

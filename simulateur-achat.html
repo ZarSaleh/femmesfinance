@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulateur d'achat pour calculer le coût total d'un ordre boursier. Visualisez les frais et le montant total avant de confirmer votre achat.">
+  <meta name="keywords" content="simulateur, achat, bourse, frais, ordre boursier, investissement, confirmation, finance, pea, compte-titres">
+  <meta name="author" content="femmesfinance">
+  <link rel="icon" href="loogo-ff.svg" type="image/x-icon">
+  <title>Simulateur d'ordre d'achat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<!-- CSS -->
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: #324942;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #265443;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  background-color: #396454;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #63aa90;
+}
+
+.result {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.result p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+</style>
+<body>
+  <div class="container">
+    <a href="index.html" style="text-decoration: none; color: #3b7f60; font-weight: bold;">←</a>
+    <h1>Simulateur d'Ordre Boursier</h1>
+    <!-- Nom de l'actif -->
+    <div class="form-group">
+      <label for="assetName">Nom de l'actif :</label>
+      <input type="text" id="assetName" placeholder="Ex : Apple (AAPL)">
+    </div>
+
+    <!-- Type d'ordre -->
+    <div class="form-group">
+      <label for="orderType">Type d'ordre :</label>
+      <select id="orderType">
+        <option value="market">Au marché</option>
+        <option value="limit">À cours limité</option>
+        <option value="stop">À seuil de déclenchement</option>
+        <option value="stop-limit">À plage de déclenchement</option>
+      </select>
+    </div>
+
+    <!-- Prix unitaire -->
+    <div class="form-group price-field">
+      <label for="price">Prix d'exécution (€) </label>
+      <input type="number" id="price" value="150" min="0" step="0.01">
+    </div>
+
+    <!-- Prix limite pour ordres spéciaux -->
+    <div class="form-group hidden" id="limitPriceField">
+      <label for="limitPrice">Prix limite (€) </label>
+      <input type="number" id="limitPrice" placeholder="Ex : 148.00">
+    </div>
+
+    <div class="form-group hidden" id="stopPriceField">
+      <label for="stopPrice">Prix de déclenchement (€) </label>
+      <input type="number" id="stopPrice" placeholder="Ex : 152.00">
+    </div>
+
+    <!-- Quantité -->
+    <div class="form-group">
+      <label for="quantity">Quantité </label>
+      <input type="number" id="quantity" value="1" min="1">
+    </div>
+
+    <!-- Frais de courtage -->
+    <div class="form-group">
+      <label for="fees">Frais de courtage (%) </label>
+      <input type="number" id="fees" value="0.5" step="0.01">
+      <small>(Min 2 € par ordre)</small>
+    </div>
+
+    <!-- Fonds disponibles -->
+    <div class="form-group">
+      <label for="balance">Fonds disponibles (€):</label>
+      <input type="number" id="balance" value="1000" step="0.01">
+    </div>
+
+    <!-- Bouton de simulation -->
+    <button id="calculateBtn">Simuler l'ordre</button>
+
+    <!-- Résultat -->
+    <div id="result" class="result">
+      <h2>Récapitulatif</h2>
+      <p id="recap">Remplissez les informations pour voir la simulation...</p>
+    </div>
+
+    <!-- Confirmation -->
+    <button id="confirmBtn" class="hidden">Confirmer l'ordre</button>
+  </div>
+
+
+   <!-- SCRIPT -->
+  <script>
+    const orderType = document.getElementById("orderType");
+const limitPriceField = document.getElementById("limitPriceField");
+const stopPriceField = document.getElementById("stopPriceField");
+const calculateBtn = document.getElementById("calculateBtn");
+const recapElement = document.getElementById("recap");
+const confirmBtn = document.getElementById("confirmBtn");
+
+orderType.addEventListener("change", () => {
+  limitPriceField.classList.add("hidden");
+  stopPriceField.classList.add("hidden");
+
+  if (orderType.value === "limit") limitPriceField.classList.remove("hidden");
+  if (orderType.value === "stop") stopPriceField.classList.remove("hidden");
+  if (orderType.value === "stop-limit") {
+    stopPriceField.classList.remove("hidden");
+    limitPriceField.classList.remove("hidden");
+  }
+});
+
+calculateBtn.addEventListener("click", () => {
+  const assetName = document.getElementById("assetName").value || "Actif inconnu";
+  const price = parseFloat(document.getElementById("price").value);
+  const limitPrice = parseFloat(document.getElementById("limitPrice").value);
+  const stopPrice = parseFloat(document.getElementById("stopPrice").value);
+  const quantity = parseInt(document.getElementById("quantity").value);
+  const feesPercent = parseFloat(document.getElementById("fees").value);
+  const balance = parseFloat(document.getElementById("balance").value);
+
+  if (!price || !quantity || !feesPercent || !balance) {
+    alert("Veuillez remplir correctement les champs.");
+    return;
+  }
+
+  let executionPrice = price;
+  if (orderType.value === "limit" && limitPrice) executionPrice = limitPrice;
+  if (orderType.value === "stop" && stopPrice) executionPrice = stopPrice;
+  if (orderType.value === "stop-limit" && limitPrice) executionPrice = limitPrice;
+
+  let total = executionPrice * quantity;
+  let fees = (total * feesPercent) / 100;
+  if (fees < 2) fees = 2; // Frais minimum
+
+  const totalOrder = total + fees;
+
+  if (balance >= totalOrder) {
+    recapElement.innerHTML = `
+      <strong>${assetName}</strong><br>
+      Type d'ordre : ${orderType.options[orderType.selectedIndex].text}<br>
+      Prix d'exécution : ${executionPrice.toFixed(2)} €<br>
+      Quantité : ${quantity}<br>
+      Sous-total : ${total.toFixed(2)} €<br>
+      Frais : ${fees.toFixed(2)} €<br>
+      <strong>Total : ${totalOrder.toFixed(2)} €</strong><br>
+      Achat possible (solde restant : ${(balance - totalOrder).toFixed(2)} €)
+    `;
+    confirmBtn.classList.remove("hidden");
+  } else {
+    recapElement.innerHTML = `
+      <strong>${assetName}</strong><br>
+      Type d'ordre : ${orderType.options[orderType.selectedIndex].text}<br>
+      Prix d'exécution : ${executionPrice.toFixed(2)} €<br>
+      Quantité : ${quantity}<br>
+      Sous-total : ${total.toFixed(2)} €<br>
+      Frais : ${fees.toFixed(2)} €<br>
+      <strong>Total : ${totalOrder.toFixed(2)} €</strong><br>
+      Fonds insuffisants ! (il manque ${(totalOrder - balance).toFixed(2)} €)
+    `;
+    confirmBtn.classList.add("hidden");
+  }
+});
+
+confirmBtn.addEventListener("click", () => {
+  alert("Ordre simulé confirmé !");
+});
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
