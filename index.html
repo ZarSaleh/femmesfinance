@@ -10,7 +10,6 @@
 <title>Femmes & Finance - Éducation financière pour les femmes</title>
 <meta name="description" content="Femmes & Finance est une plateforme gratuite dédiée à l'éducation financière. Découvrez des outils, guides et ressources pour gérer votre budget, épargner efficacement et investir intelligemment.">
 
-
 <!-- Balises sociales pour Google / Facebook / Twitter -->
 <meta property="og:title" content="Femmes & Finance - Éducation financière" />
 <meta property="og:description" content="Accédez gratuitement à des guides, outils et podcasts pour mieux gérer vos finances." />
@@ -37,6 +36,7 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="https://femmesfinance.fr" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/ticker.js"></script>
 </head>
 
 <body>
@@ -304,24 +304,268 @@ function initLandbot() {
             setInterval(updateText, 2000);
         </script>
     </section>
-    <!--
-    <section id="apropos" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-6">
-                    Pourquoi Femmes & Finance ?
-                </h2>
-                <div class="flex justify-center mb-8">
-                    <img src="Finance.png" alt="photo de profil" width="120" height="120">
-                </div>
-                <p class="text-lg text-natural-700"> 
-                    Femmes & Finance est une initiative dédiée à aider les femmes à prendre le contrôle de leurs finances personnelles. 
-                    Nous croyons en l'importance de l'éducation financière pour bâtir un avenir serein et prospère. Notre mission est de fournir des ressources accessibles 
-                    et adaptées à toutes les femmes, quel que soit leur niveau de connaissance en finance.
-                </p>
-            </div>
-        </div>
-    </section> -->
+
+
+    <!-- ===== Femmes & Finance — Bandeau Cours ===== -->
+<section id="ff-ticker" aria-label="Cours de bourse en direct" class="ff-ticker">
+  <div class="ff-ticker__inner" role="marquee" aria-live="polite">
+    <!-- Les items seront injectés ici -->
+  </div>
+</section>
+
+<style>
+  :root{
+    --ff-bg: #ffffff;
+    --ff-text: #111;
+    --ff-muted: #6b7280;
+    --ff-up: #0a7f2e;
+    --ff-down: #b00020;
+    --ff-card: #f7f7f8;
+    --ff-border: #e6e6e8;
+    --ff-accent: #111827;
+    --ff-radius: 12px;
+    --ff-gap: 10px;
+    --ff-height: 56px;
+    --ff-speed: 45s; /* durée d’un tour de défilement */
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ff-bg: #0f1115;
+      --ff-text: #eef2ff;
+      --ff-muted: #94a3b8;
+      --ff-up: #22c55e;
+      --ff-down: #ef4444;
+      --ff-card: #151924;
+      --ff-border: #1f2430;
+      --ff-accent: #e5e7eb;
+    }
+  }
+
+  .ff-ticker{
+    position: relative;
+    background: var(--ff-bg);
+    border-top: 1px solid var(--ff-border);
+    border-bottom: 1px solid var(--ff-border);
+    overflow: hidden;
+    user-select: none;
+  }
+  .ff-ticker__inner{
+    display: flex;
+    gap: var(--ff-gap);
+    align-items: stretch;
+    padding: 8px 0;
+    min-height: var(--ff-height);
+    /* Marquee-like animation */
+    animation: ff-scroll var(--ff-speed) linear infinite;
+  }
+  /* Duplique la piste pour un défilement continu */
+  .ff-ticker__inner > .ff-track{ display: flex; gap: var(--ff-gap); }
+  .ff-ticker__inner:hover{ animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce){
+    .ff-ticker__inner{ animation: none; }
+  }
+  @keyframes ff-scroll{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); } /* on fait défiler une piste de 50% car dupliquée */
+  }
+
+  .ff-quote{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    background: var(--ff-card);
+    border: 1px solid var(--ff-border);
+    border-radius: var(--ff-radius);
+    padding: 10px 12px;
+    height: var(--ff-height);
+    white-space: nowrap;
+  }
+  .ff-quote__symbol{
+    font-weight: 700;
+    color: var(--ff-accent);
+    font-size: 14px;
+  }
+  .ff-quote__name{
+    color: var(--ff-muted);
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 24ch;
+  }
+  .ff-quote__price{
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+  .ff-quote__change{
+    font-variant-numeric: tabular-nums;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--ff-border);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .ff-quote__change[data-dir="up"]{ color: var(--ff-up); }
+  .ff-quote__change[data-dir="down"]{ color: var(--ff-down); }
+
+  /* micro-animation de rafraîchissement */
+  .ff-flash{
+    animation: ff-flash 500ms ease-out;
+  }
+  @keyframes ff-flash{
+    from{ box-shadow: inset 0 0 0 999px rgba(255,255,0,0.15); }
+    to  { box-shadow: inset 0 0 0 0 rgba(255,255,0,0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px){
+    .ff-quote{ gap: 8px; padding: 8px 10px; height: 48px; }
+    .ff-quote__name{ display:none; }
+  }
+</style>
+
+<script>
+/**
+ * Femmes & Finance — Bandeau Cours
+ * - DEMO: données mockées
+ * - LIVE: passer USE_LIVE=true + implémenter votre endpoint proxy côté serveur
+ */
+(function(){
+  const USE_LIVE = false;                       // ← passe à true pour activer le mode LIVE
+  const REFRESH_MS = 60_000;                    // fréquence de rafraîchissement
+  const ENDPOINT = "/api/quotes";               // ← ton proxy backend sécurisé (CORS + clé)
+
+  // Liste d’actifs par défaut (indices + ETF + actions)
+  const ASSETS = [
+    {symbol:"^FCHI", name:"CAC 40 (Index)"},
+    {symbol:"^GSPC", name:"S&P 500 (Index)"},
+    {symbol:"^NDX",  name:"Nasdaq 100 (Index)"},
+    {symbol:"EUNL.DE", name:"iShares Core MSCI World (ETF)"},
+    {symbol:"CSPX.L",  name:"iShares Core S&P 500 (ETF)"},
+    {symbol:"LYXNDX.PA", name:"Lyxor Nasdaq-100 (ETF)"},
+    {symbol:"MC.PA",  name:"LVMH (Action)"},
+    {symbol:"AAPL",   name:"Apple (Action)"},
+    {symbol:"TSLA",   name:"Tesla (Action)"},
+  ];
+
+  // --- Helpers
+  const $wrap = document.currentScript.previousElementSibling; // .ff-ticker
+  const $inner = $wrap.querySelector(".ff-ticker__inner");
+
+  function fmt(n, digits=2){
+    if(n === null || n === undefined || Number.isNaN(n)) return "—";
+    return Number(n).toLocaleString(undefined, {maximumFractionDigits: digits});
+  }
+  function dirFromChange(pct){
+    if(pct > 0) return "up";
+    if(pct < 0) return "down";
+    return "flat";
+  }
+  function iconForDir(dir){
+    // Flèches unicode — friendly daltoniens (↑/↓) + couleurs CSS
+    return dir === "up" ? "↑" : dir === "down" ? "↓" : "•";
+  }
+
+  // Crée un item DOM
+  function createItem(q){
+    const dir = dirFromChange(q.changePercent);
+    const $item = document.createElement("div");
+    $item.className = "ff-quote";
+    $item.setAttribute("aria-label", `${q.name} ${q.price} ${q.changePercent>=0?'+':''}${fmt(q.changePercent,2)}%`);
+    $item.innerHTML = `
+      <div>
+        <div class="ff-quote__symbol">${q.symbol}</div>
+        <div class="ff-quote__name" title="${q.name}">${q.name}</div>
+      </div>
+      <div class="ff-quote__price" data-symbol="${q.symbol}">${fmt(q.price,2)}</div>
+      <div class="ff-quote__change" data-dir="${dir}">
+        <span aria-hidden="true">${iconForDir(dir)}</span>
+        <span>${q.changePercent>=0?'+':''}${fmt(q.changePercent,2)}%</span>
+      </div>
+    `;
+    return $item;
+  }
+
+  // Injecte 2 pistes (dupliquées) pour un défilement infini fluide
+  function renderTrack(quotes){
+    $inner.innerHTML = "";
+    const trackA = document.createElement("div");
+    trackA.className = "ff-track";
+    const trackB = document.createElement("div");
+    trackB.className = "ff-track";
+
+    quotes.forEach(q => {
+      trackA.appendChild(createItem(q));
+      trackB.appendChild(createItem(q));
+    });
+
+    $inner.appendChild(trackA);
+    $inner.appendChild(trackB);
+  }
+
+  // Met à jour les valeurs directement dans le DOM (sans tout reconstruire)
+  function patchValues(quotes){
+    const priceMap = new Map(quotes.map(q => [q.symbol, q]));
+    $inner.querySelectorAll(".ff-quote").forEach($q => {
+      const sym = $q.querySelector(".ff-quote__price")?.dataset.symbol;
+      const data = priceMap.get(sym);
+      if(!data) return;
+      const $price = $q.querySelector(".ff-quote__price");
+      const $change = $q.querySelector(".ff-quote__change");
+
+      if($price && $price.textContent !== fmt(data.price,2)){
+        $price.textContent = fmt(data.price,2);
+        $q.classList.remove("ff-flash"); // retrigger animation
+        void $q.offsetWidth;
+        $q.classList.add("ff-flash");
+      }
+      if($change){
+        const dir = dirFromChange(data.changePercent);
+        $change.setAttribute("data-dir", dir);
+        $change.innerHTML = `<span aria-hidden="true">${iconForDir(dir)}</span><span>${data.changePercent>=0?'+':''}${fmt(data.changePercent,2)}%</span>`;
+      }
+    });
+  }
+
+  // --- Data fetching
+  async function fetchQuotes(symbols){
+    if(!USE_LIVE){
+      // DEMO — données mockées (variation légère à chaque tick pour l’illusion de vie)
+      return symbols.map((s, i) => {
+        const base = 100 + (i * 25);
+        const drift = (Math.sin(Date.now()/60000 + i) * 0.5);
+        const price = +(base + drift).toFixed(2);
+        const chg = +(Math.sin(Date.now()/300000 + i) * 1.2).toFixed(2); // %
+        return { symbol: s.symbol, name: s.name, price, changePercent: chg };
+      });
+    }
+
+    // LIVE — appelle ton backend proxy (format attendu ci-dessous)
+    // Attendu: [{symbol:"AAPL", name:"Apple", price:227.12, changePercent: +0.84}, ...]
+    const url = new URL(ENDPOINT, location.origin);
+    url.searchParams.set("symbols", symbols.map(s => s.symbol).join(","));
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    if(!res.ok) throw new Error("Erreur API");
+    return await res.json();
+  }
+
+  // Init
+  (async function init(){
+    const initial = await fetchQuotes(ASSETS);
+    renderTrack(initial);
+    // refresh loop
+    setInterval(async ()=>{
+      try{
+        const q = await fetchQuotes(ASSETS);
+        patchValues(q);
+      }catch(e){ /* silencieux pour UX */ }
+    }, REFRESH_MS);
+  })();
+})();
+</script>
+<!-- ===== Fin bandeau ===== -->
 
     <!-- Section feature -->
 
@@ -792,19 +1036,45 @@ function initLandbot() {
         </div>
         </section>
 
+<!-- Script pour le ticker Bourse-->
 
-    <!-- Section Call to Action 
-    <section id="guide" class="py-16 bg-emerald-100">
-        <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto text-center bg-white rounded-lg shadow-lg p-8">
-                <h1 class="text-2xl md:text-3xl font-bold text-emerald-800 mb-4">Recevez votre guide gratuit</h1>
-                <p class="text-lg text-neutral-700 mb-6">
-                    Inscrivez-vous pour recevoir votre guide gratuit et rejoindre notre newsletter.
-                </p>
-                <iframe width="540" height="305" src="https://sibforms.com/serve/MUIFAPef1qx2K8_YKdqPgXAP3FJ0qi_oHaSSbiBVI-2wG2tKyqDR38fY0kQqh7cwyqARs4x9o3UwNZz0dyytTtvolcp1QjDgQQkk36jiUqpOop0bn0KgLfPEyGXvqe6-5LEtOh1jlVkS5qsrT5VzQS6rDuktjrZOn8fw9g-CxeyT6tn8jo6KmoSVCIKePAY9QKMo_C1xBLYcgipo" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
-            </div>
-        </div>
-    </section> -->
+<script>
+    // server.js — exemple proxy très simple
+import express from "express";
+import fetch from "node-fetch";
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Exemple avec Finnhub (remplace par ton provider)
+// FINNHUB_TOKEN à mettre dans tes variables d'env
+app.get("/api/quotes", async (req, res) => {
+  try {
+    const symbols = (req.query.symbols || "").split(",").filter(Boolean).slice(0, 40);
+    if (!symbols.length) return res.json([]);
+
+    const results = await Promise.all(symbols.map(async sym => {
+      // Adapte la logique selon l’API choisie
+      const q = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(sym)}&token=${process.env.FINNHUB_TOKEN}`).then(r=>r.json());
+      // Structure de sortie unifiée côté front:
+      return {
+        symbol: sym,
+        name: sym,                 // idéalement, mappe symbol -> nom lisible depuis ta DB
+        price: q.c ?? null,        // current
+        changePercent: q.dp ?? 0   // delta %
+      };
+    }));
+
+    res.set("Cache-Control", "public, max-age=30"); // léger cache CDN
+    res.json(results);
+  } catch (e) {
+    res.status(500).json({ error: "quote_fetch_failed" });
+  }
+});
+
+app.listen(PORT, () => console.log("Proxy quotes up on", PORT));
+</script>
+   
     
     <!-- Section Footer -->
     <footer class="bg-[rgba(53,70,59,1)] text-white py-12">
@@ -880,6 +1150,7 @@ type="module"></script>
         "description": "Femmes & Finance est une plateforme gratuite dédiée à l'éducation financière des femmes. Découvrez des outils, guides et ressources pour gérer votre budget, épargner efficacement et investir intelligemment.",
     }
 </script>
+
 
 
 </body>
