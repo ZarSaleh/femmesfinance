@@ -324,37 +324,6 @@ function initLandbot() {
 </section>
 
 <style>
-body { margin: 0; font-family: sans-serif; background: #565252; }
-
-    .ff-ticker {
-      background: #ffffff;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      overflow: hidden;
-      white-space: nowrap;
-      width: 100%;
-    }
-
-    .ff-ticker-inner {
-      display: inline-block;
-      padding: 10px 0;
-      animation: tickerScroll 25s linear infinite;
-    }
-
-    .ff-item {
-      display: inline-block;
-      padding: 0 20px;
-      font-size: 14px;
-      color: #111;
-    }
-
-    .up { color: green; }
-    .down { color: red; }
-
-    @keyframes tickerScroll {
-      0%   { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
 
   .ff-quote{
     display: grid;
@@ -413,9 +382,123 @@ body { margin: 0; font-family: sans-serif; background: #565252; }
   }
 </style>
 
+
+
+<!-- Section Hero avec ticker boursier -->
+ 
+<section class="relative bg-neutral-900 text-white overflow-hidden">
+    <!-- Ticker -->
+    <div class="ff-ticker bg-neutral-800 rounded-xl shadow-lg overflow-hidden">
+      <div class="ff-ticker-inner flex gap-8 px-6 py-3 animate-scroll">
+        <!-- Les données API seront injectées ici -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Animation défilante horizontale */
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ff-ticker {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ff-ticker-inner {
+  display: flex;
+  min-width: 200%;
+  animation: tickerScroll 40s linear infinite;
+}
+.ff-quote {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.ff-quote__symbol {
+  font-weight: bold;
+  color: #f5f5f5;
+}
+.ff-quote__price {
+  font-weight: 600;
+}
+.ff-quote__change[data-dir="up"] { color: #4ade80; }   /* vert */
+.ff-quote__change[data-dir="down"] { color: #f87171; } /* rouge */
+.ff-quote__change[data-dir="flat"] { color: #e5e7eb; } /* gris */
+.ff-flash {
+  animation: flash 0.5s ease-in-out;
+}
+@keyframes flash {
+  0% { background: rgba(255,255,255,0.2); }
+  100% { background: transparent; }
+}
+</style>
+
+<script>
+(async function(){
+  const $inner = document.querySelector(".ff-ticker-inner");
+  const symbols = ["^FCHI","^GSPC","^NDX","AAPL","TSLA"]; // CAC40, S&P500, Nasdaq, Apple, Tesla
+
+  function fmt(n, d=2){
+    if(n == null) return "—";
+    return Number(n).toLocaleString(undefined,{maximumFractionDigits:d});
+  }
+  function dirFromChange(p){ 
+    if(p > 0) return "up"; 
+    if(p < 0) return "down"; 
+    return "flat"; 
+  }
+  function icon(dir){ 
+    return dir==="up"?"↑":dir==="down"?"↓":"•"; 
+  }
+
+  function createItem(q){
+    const dir = dirFromChange(q.changePercent);
+    const el = document.createElement("div");
+    el.className = "ff-quote";
+    el.innerHTML = `
+      <span class="ff-quote__symbol">${q.symbol}</span>
+      <span class="ff-quote__price" data-symbol="${q.symbol}">${fmt(q.price)}</span>
+      <span class="ff-quote__change" data-dir="${dir}">
+        ${icon(dir)} ${q.changePercent>=0?"+":""}${fmt(q.changePercent)}%
+      </span>
+    `;
+    return el;
+  }
+
+  async function fetchQuotes(){
+    const url = `/api/quotes?symbols=${symbols.join(",")}`;
+    const res = await fetch(url);
+    return await res.json();
+  }
+
+  async function updateTicker(){
+    try {
+      const data = await fetchQuotes();
+      $inner.innerHTML = "";
+      // Dupliquer la liste pour un scroll infini
+      for(let i=0;i<2;i++){
+        data.forEach(q => $inner.appendChild(createItem(q)));
+      }
+    } catch(e){
+      console.error("Erreur API", e);
+    }
+  }
+
+  updateTicker();
+  setInterval(updateTicker, 60_000); // refresh chaque minute
+})();
+</script>
+
+
+<!--
+
 <div class="ff-ticker">
   <div class="ff-ticker-inner" id="ticker">
-    <!-- Les données API seront injectées ici -->
+  
   </div>
 </div>
 
@@ -448,7 +531,7 @@ body { margin: 0; font-family: sans-serif; background: #565252; }
 </script>
 
 
-<!--
+
 
 <script>
 /**
