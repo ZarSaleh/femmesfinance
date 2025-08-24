@@ -64,6 +64,9 @@ function initLandbot() {
     
             
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+
 <style>
     .italic {
         font-family:Georgia, 'Times New Roman', Times, serif
@@ -72,7 +75,7 @@ function initLandbot() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #213826;
+  background: #ffffff;
   padding: 10px 20px;
 }
 
@@ -80,6 +83,7 @@ function initLandbot() {
   display: flex;
   list-style: none;
   gap: 20px;
+  color: #000;
 }
 
 .menu-toggle {
@@ -88,7 +92,7 @@ function initLandbot() {
   background: none;
   border: none;
   cursor: pointer;
-    color: white;
+  color: rgb(10, 25, 21);
 }
 
 /* Responsive : version mobile */
@@ -107,6 +111,7 @@ function initLandbot() {
 
   .nav-links.show {
     display: flex;
+    color: #000;
   }
 }
 
@@ -116,12 +121,12 @@ function initLandbot() {
     <nav class="navbar">
         <div class="logo container mx-auto py-4 px-4 flex justify-between items-center">
             <div class="flex items-center">
-            <img src="loogo-ff.svg" alt="ff logo" width="40px" height="30px">
+            <img src="logofinance.svg" alt="ff logo" width="40px" height="30px">
             </div>
             <button class="menu-toggle" onclick="toggleMenu(); this.style.display = 'none';">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li class="relative"></li>
-                    <button onclick="toggleDropdown()" class="text-sm font-medium text-white hover:text-white focus:outline-none">
+                    <button onclick="toggleDropdown()" class="text-sm font-medium text-black hover:text-grey focus:outline-none">
                         Fonctionnalités
                     </button>
                     <ul id="dropdownMenu" class="absolute hidden bg-white shadow-lg rounded-lg mt-2">
@@ -138,10 +143,10 @@ function initLandbot() {
                         dropdownMenu.classList.toggle('hidden');
                     }
                 </script>
-                <li><a href="#appros" class="text-sm font-medium text-white hover:text-white">À propos</a></li>
-                <li><a href="blog.html" class="text-sm font-medium text-white hover:text-white hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
-                <li><a href="#guide" class="text-sm font-medium text-white hover:text-white hover:underline">Guide</a></li>
-                <li><a href="#contact" class="text-sm font-medium text-white hover:text-white hover:underline">Contact</a></li>
+                <li><a href="#appros" class="text-sm font-medium text-black hover:text-white">À propos</a></li>
+                <li><a href="blog.html" class="text-sm font-medium text-black hover:text-grey hover:underline" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                <li><a href="#guide" class="text-sm font-medium text-black hover:text-grey hover:underline">Guide</a></li>
+                <li><a href="#contact" class="text-sm font-medium text-black hover:text-grey hover:underline">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -212,6 +217,8 @@ function initLandbot() {
             box-shadow: 0 0 0 2px var(--emerald-600);
         }
     </style>
+
+    
     <!-- Section 2 : Hero-->
     <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
@@ -250,6 +257,9 @@ function initLandbot() {
             </div>
         </div>
     </section>
+
+
+
     <!--Section à propos-->
     <!-- Section Animated Text -->
     <style>
@@ -629,15 +639,7 @@ body { margin: 0; font-family: sans-serif; background: #565252; }
         </div>
     </section>
            
-  <!-- Section quote -->
-    <section class="py-14 "></section>
-        <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto text-center">
-                <blockquote class="text-2xl md:text-3xl  text-emerald-800">
-                    “Investir en soi est le meilleur investissement que l'on puisse faire.”
-                </blockquote>
-            </div>
-        </div>
+  
     </section>
     <!-- Section Resources -->
     <section id="more" class="py-16 bg-white">
