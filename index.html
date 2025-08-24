@@ -314,60 +314,37 @@ function initLandbot() {
 </section>
 
 <style>
-  :root{
-    --ff-bg: rgba(48, 63, 53, 1);
-    --ff-text: #fff;
-    --ff-muted: #6b7280;
-    --ff-up: #0a7f2e;
-    --ff-down: #b00020;
-    --ff-card: #f7f7f8;
-    --ff-border: #e6e6e8;
-    --ff-accent: #111827;
-    --ff-radius: 12px;
-    --ff-gap: 10px;
-    --ff-height: 56px;
-    --ff-speed: 45s; /* durée d’un tour de défilement */
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ff-bg: #0f1115;
-      --ff-text: #eef2ff;
-      --ff-muted: #94a3b8;
-      --ff-up: #22c55e;
-      --ff-down: #ef4444;
-      --ff-card: #151924;
-      --ff-border: #1f2430;
-      --ff-accent: #e5e7eb;
-    }
-  }
+body { margin: 0; font-family: sans-serif; background: #565252; }
 
-  .ff-ticker{
-    position: relative;
-    background: var(--ff-bg);
-    border-top: 1px solid var(--ff-border);
-    border-bottom: 1px solid var(--ff-border);
-    overflow: hidden;
-    user-select: none;
-  }
-  .ff-ticker__inner{
-    display: flex;
-    gap: var(--ff-gap);
-    align-items: stretch;
-    padding: 8px 0;
-    min-height: var(--ff-height);
-    /* Marquee-like animation */
-    animation: ff-scroll var(--ff-speed) linear infinite;
-  }
-  /* Duplique la piste pour un défilement continu */
-  .ff-ticker__inner > .ff-track{ display: flex; gap: var(--ff-gap); }
-  .ff-ticker__inner:hover{ animation-play-state: paused; }
-  @media (prefers-reduced-motion: reduce){
-    .ff-ticker__inner{ animation: none; }
-  }
-  @keyframes ff-scroll{
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); } /* on fait défiler une piste de 50% car dupliquée */
-  }
+    .ff-ticker {
+      background: #ffffff;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    .ff-ticker-inner {
+      display: inline-block;
+      padding: 10px 0;
+      animation: tickerScroll 25s linear infinite;
+    }
+
+    .ff-item {
+      display: inline-block;
+      padding: 0 20px;
+      font-size: 14px;
+      color: #111;
+    }
+
+    .up { color: green; }
+    .down { color: red; }
+
+    @keyframes tickerScroll {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
 
   .ff-quote{
     display: grid;
@@ -425,6 +402,43 @@ function initLandbot() {
     .ff-quote__name{ display:none; }
   }
 </style>
+
+<div class="ff-ticker">
+  <div class="ff-ticker-inner" id="ticker">
+    <!-- Les données API seront injectées ici -->
+  </div>
+</div>
+
+<script>
+  const ticker = document.getElementById("ticker");
+  const symbols = ["^FCHI","^GSPC","^NDX","AAPL","TSLA"]; // CAC40, S&P500, Nasdaq, Apple, Tesla
+
+  async function fetchQuotes() {
+    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbols.join(",")}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    return json.quoteResponse.result;
+  }
+
+  async function updateTicker() {
+    const data = await fetchQuotes();
+    ticker.innerHTML = ""; // On vide avant de remplir
+    data.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "ff-item";
+      const change = item.regularMarketChangePercent?.toFixed(2);
+      const dir = change >= 0 ? "up" : "down";
+      el.innerHTML = `<strong>${item.symbol}</strong> : ${item.regularMarketPrice} <span class="${dir}">(${change}%)</span>`;
+      ticker.appendChild(el);
+    });
+  }
+
+  updateTicker();
+  setInterval(updateTicker, 60000); // MAJ chaque minute
+</script>
+
+
+<!--
 
 <script>
 /**
@@ -565,7 +579,8 @@ function initLandbot() {
   })();
 })();
 </script>
-<!-- ===== Fin bandeau ===== -->
+
+-->
 
     <!-- Section feature -->
 
